@@ -1,0 +1,9 @@
+type Resolution {
+  name: String!
+  age: Int!
+  description: String!
+}
+
+type Mutation {
+  addData(name: String): [Resolution]
+}
