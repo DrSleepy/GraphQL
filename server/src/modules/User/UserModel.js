@@ -1,6 +1,4 @@
-import mongoose from 'mongoose';
-
-const { Schema } = mongoose;
+import mongoose, { Schema } from 'mongoose';
 
 const UserSchema = new Schema({
   displayName: {
@@ -16,5 +14,10 @@ const UserSchema = new Schema({
     ref: 'Chatlist'
   }
 });
+
+// Schema can have plugins
+// Schema have pre.('save') methods (use it to hash pass)
+// When schema is accessed, it is possibl to check if a field is being modified like so:
+// this.isModified('displayName')
 
 export default mongoose.model('User', UserSchema);

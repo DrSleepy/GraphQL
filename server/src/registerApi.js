@@ -1,8 +1,8 @@
 import { makeExecutableSchema } from 'graphql-tools';
 import merge from 'lodash/merge';
 
-import ResolutionSchema from './api/resolution/resolutionSchema.graphql';
-import ResolutionResolver from './api/resolution/resolvers';
+import ResolutionSchema from './graphql/resolution/resolutionSchema.graphql';
+import ResolutionResolver from './graphql/resolution/resolvers';
 
 const testSchema = `
   type Query {

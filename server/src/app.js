@@ -2,7 +2,7 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
 
-import config from './config';
+import * as config from './config';
 import schema from './registerApi';
 
 import './connection';
@@ -23,6 +23,6 @@ app.use(
 );
 
 // Server
-app.listen(config.port, () => {
-  console.log(`Server has started on port ${config.port}`);
+app.listen(config.PORT, () => {
+  console.log(`Server has started on port ${config.PORT}`);
 });
