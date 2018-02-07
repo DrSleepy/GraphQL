@@ -6,5 +6,5 @@ const data = [
 ];
 
 export default {
-  getAllUsers2: () => data
+  getAllUsers: () => data
 };

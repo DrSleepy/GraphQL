@@ -1,38 +1,27 @@
 import { makeExecutableSchema } from 'graphql-tools';
 
-import ResolutionSchema from './graphql/resolution/resolutionSchema.graphql';
-import ResolutionResolver from './graphql/resolution/resolvers';
+// User
+import userSchema from './graphql/user/userSchema.graphql';
+import userQueries from './graphql/user/queries';
+import userMutations from './graphql/user/mutations';
 
-import UserSchema from './graphql/user/resolutionSchema.graphql';
-import { userMutations, userQueries } from './graphql/user/resolvers';
+// Private Chat
+import privateChatSchema from './graphql/privateChat/privateChatSchema.graphql';
+import privateChatQueries from './graphql/privateChat/queries';
+import privateChatMutations from './graphql/privateChat/mutations';
 
-import User2Schema from './graphql/user2/resolutionSchema.graphql';
-import user2Mutations from './graphql/user2/mutations';
-import user2Queries from './graphql/user2/queries';
+const typeDefs = [userSchema, privateChatSchema];
 
-const typeDefs = [User2Schema, UserSchema];
-
-// const resolvers = merge(ResolutionResolver, UserResolver);
-// const resolvers = {
-//   ...userQueries,
-//   ...userMutations,
-//   ...user2Mutations,
-//   ...user2Queries
-// };
 const resolvers = {
   Query: {
     ...userQueries,
-    ...user2Queries
+    ...privateChatQueries
   },
 
   Mutation: {
     ...userMutations,
-    ...user2Mutations
+    ...privateChatMutations
   }
 };
-console.log(resolvers);
 
 export default makeExecutableSchema({ typeDefs, resolvers });
-
-// { Query: { allData: [Function: allData] },
-// Mutation: { addData: [Function: addData] } }
