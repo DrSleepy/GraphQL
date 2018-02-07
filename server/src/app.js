@@ -1,6 +1,7 @@
 import bodyParser from 'body-parser';
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
+import cors from 'cors';
 
 import { PORT } from './config';
 import schema from './graphql/registerGraphQL';
@@ -11,6 +12,7 @@ import './connection';
 const app = express();
 
 // Middleware
+app.use(cors());
 app.use(bodyParser.json());
 
 // Graphql
