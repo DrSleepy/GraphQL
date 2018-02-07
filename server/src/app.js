@@ -2,12 +2,12 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
 
-import * as config from './config';
+import { PORT } from './config';
 import schema from './registerApi';
 
+// Connects to DB
 import './connection';
-import './mongoTest';
-// hi
+
 const app = express();
 
 // Middleware
@@ -23,6 +23,18 @@ app.use(
 );
 
 // Server
-app.listen(config.PORT, () => {
-  console.log(`Server has started on port ${config.PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server has started on port ${PORT}`);
 });
+
+// Mongodb test
+// import User from './models/User';
+
+// const user = new User({
+//   displayName: 'Jimmy'
+// });
+
+// user.save((err, results) => {
+//   console.log(results);
+//   console.log(err);
+// });

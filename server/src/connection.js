@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
-import * as config from './config';
+import { DB_URI } from './config';
 
 mongoose.Promise = global.Promise;
 
 mongoose
-  .connect(config.DB_URI)
+  .connect(DB_URI)
   .then(() => {
     console.log('Connected to MongoDB');
   })
