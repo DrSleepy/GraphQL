@@ -12,8 +12,4 @@ export const sendMessage = () => {
   // UserModel.create/send/save
 };
 
-export const deleteMessage = () => {
-  // validate here
-  // then do message stuff here
-  // UserModel.create/send/save
-};
+export const deleteMessage = () => {};

@@ -1,7 +1,12 @@
+# This file MUST include ALL mutations, queries AND Subscriptions
 type Resolution {
   name: String!
   age: Int!
   description: String!
+}
+
+type Query {
+  allData: [User]
 }
 
 type Mutation {

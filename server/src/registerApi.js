@@ -1,30 +1,38 @@
 import { makeExecutableSchema } from 'graphql-tools';
-import merge from 'lodash/merge';
 
 import ResolutionSchema from './graphql/resolution/resolutionSchema.graphql';
 import ResolutionResolver from './graphql/resolution/resolvers';
 
-const testSchema = `
-  type Query {
-    hi: String
-    allData: [Customer]
-  }
+import UserSchema from './graphql/user/resolutionSchema.graphql';
+import { userMutations, userQueries } from './graphql/user/resolvers';
 
-  type Customer {
-    name: String!
-    age: Int!
-    gender: String!
-  }
-`;
+import User2Schema from './graphql/user2/resolutionSchema.graphql';
+import user2Mutations from './graphql/user2/mutations';
+import user2Queries from './graphql/user2/queries';
 
-const typeDefs = [testSchema, ResolutionSchema];
+const typeDefs = [User2Schema, UserSchema];
 
-const testResolver = {
+// const resolvers = merge(ResolutionResolver, UserResolver);
+// const resolvers = {
+//   ...userQueries,
+//   ...userMutations,
+//   ...user2Mutations,
+//   ...user2Queries
+// };
+const resolvers = {
   Query: {
-    hi: () => 'heey'
+    ...userQueries,
+    ...user2Queries
+  },
+
+  Mutation: {
+    ...userMutations,
+    ...user2Mutations
   }
 };
-
-const resolvers = merge(testResolver, ResolutionResolver);
+console.log(resolvers);
 
 export default makeExecutableSchema({ typeDefs, resolvers });
+
+// { Query: { allData: [Function: allData] },
+// Mutation: { addData: [Function: addData] } }

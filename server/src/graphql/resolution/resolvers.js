@@ -12,6 +12,9 @@ export default {
 
   Mutation: {
     addData: (/* root, args */) => data
+    //  modules/User/UserController.
+    // That file will handle everything from validtion, insertion etc
+
     // validate data
     // args = POST data. Can use { id, name } to destructure object
     // addData should return  Model.insert({ name: 'bob', age: 1, gender: 'male'})
