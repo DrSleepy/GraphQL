@@ -3,7 +3,7 @@ import express from 'express';
 import graphqlHTTP from 'express-graphql';
 
 import { PORT } from './config';
-import schema from './registerApi';
+import schema from './graphql/registerGraphQL';
 
 // Connects to DB
 import './connection';
