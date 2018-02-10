@@ -5,7 +5,7 @@ import UserModel from './model';
 import createNewUserValidation from './validation/createNewUser';
 
 // All GraphQL Queries
-export const getAllUsers = () => UserModel.findAll({});
+export const getAllUsers = () => UserModel.find({});
 
 // All GraphQL Mutations
 export const createNewUser = (root, args) => {
