@@ -1,6 +1,14 @@
 type User {
+  _id: ID! # NEEDS to be here if you want to query it.
   displayName: String!
   age: Int!
+  email: String!
+  password: String!
+}
+
+type Login {
+  email: String!
+  password: Int!
 }
 
 type Query {
@@ -8,5 +16,6 @@ type Query {
 }
 
 type Mutation {
-  createNewUser(displayName: String!, age: Int!): User
+  createNewUser(displayName: String!, age: Int!, email: String!, password: String!): User
+  login(email: String!, password: String!): Boolean
 }

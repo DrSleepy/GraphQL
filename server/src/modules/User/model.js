@@ -1,4 +1,9 @@
+/* eslint func-names: 0 */
+/* eslint space-before-function-paren: 0 */
+
 import mongoose, { Schema } from 'mongoose';
+import uniqueValidator from 'mongoose-unique-validator';
+import { genSaltSync, hashSync, compareSync } from 'bcrypt';
 
 const UserSchema = new Schema({
   displayName: {
@@ -9,15 +14,44 @@ const UserSchema = new Schema({
     type: Number,
     required: true
   },
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
   chatlist: {
     type: Schema.ObjectId,
     ref: 'Chatlist'
   }
 });
 
-// Schema can have plugins
-// Schema have pre.('save') methods (use it to hash pass)
-// When schema is accessed, it is possibl to check if a field is being modified like so:
-// this.isModified('displayName')
+// plugins
+UserSchema.plugin(uniqueValidator, {
+  message: '{VALUE} already taken'
+});
+
+// hooks
+UserSchema.pre('save', function(next) {
+  if (this.isModified('password')) {
+    this.password = this.encryptPassword(this.password);
+  }
+
+  next();
+});
+
+// methods
+UserSchema.methods = {
+  encryptPassword(password) {
+    const salt = genSaltSync(10);
+    return hashSync(password, salt);
+  },
+  comparePassword(plainPassword, hashedPassword) {
+    return compareSync(plainPassword, hashedPassword);
+  }
+};
 
 export default mongoose.model('User', UserSchema);

@@ -1,5 +1,6 @@
-import { createNewUser } from '../../modules/user/controller';
+import { createNewUser, login } from '../../modules/user/controller';
 
 export default {
-  createNewUser
+  createNewUser,
+  login
 };
