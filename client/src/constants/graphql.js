@@ -34,3 +34,9 @@ export const CREATE_NEW_USER_QUERY = gql`
     createNewUser
   }
 `;
+
+export const LOGIN_MUTATION = gql`
+  mutation LoginQuery($email: String!, $password: String!) {
+    login(email: $email, password: $password)
+  }
+`;

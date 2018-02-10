@@ -8,23 +8,45 @@
       <p v-if="loading"> LLLLLLLLLLLLLLLLLLLLLLLLLLLLL (another way to load) </p>
     </div>
     <button @click="getAllUsersList()"> Submit </button>
+
+    <input type="email" v-model="email">
+    <input type="text" v-model="password">
+    <button @click="login()"> submit </button>
+
   </div>
 </template>
 
 <script>
-import { GET_ALL_USERS_QUERY, GET_ALL_PRIVATE_CHATS_QUERY } from './constants/graphql';
+import {
+  GET_ALL_USERS_QUERY,
+  GET_ALL_PRIVATE_CHATS_QUERY,
+  LOGIN_MUTATION
+} from './constants/graphql';
 
 export default {
   data() {
     return {
       getAllUsers: 'x',
-      loading: 0
+      loading: 0,
+      email: '',
+      password: ''
     };
   },
   methods: {
     async getAllUsersList() {
       const response = await this.$apollo.query({ query: GET_ALL_USERS_QUERY });
       this.getAllUsers = response.data.getAllUsers;
+    },
+    async login() {
+      const email = this.email;
+      const password = this.password;
+
+      const response = await this.$apollo.mutate({
+        mutation: LOGIN_MUTATION,
+        variables: { email, password }
+      });
+
+      console.log(response);
     }
   },
   apollo: {

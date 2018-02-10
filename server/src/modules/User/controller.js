@@ -17,7 +17,6 @@ export const createNewUser = (root, args) => {
 
 export const login = async (root, args) => {
   const result = loginValidation(args);
-
   if (result.error) return result.error;
 
   const { email, password } = result.value;
