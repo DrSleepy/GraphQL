@@ -1,25 +1,15 @@
-// THIS IS WHERE ACTUAL USER METHODS LIVE. CONTROLLER CALLS VALIDATION folder to validate data.
-// File within validation folder returns if passed data is valid
-
-// ALL function in return directly to GRAPHQL calls
+// 'args' parameter in functions is values used in GraphQL mutation
+// All functions return directly to GraphQL query/mutation
 
 import UserModel from './model';
 import createNewUserValidation from './validation/createNewUser';
 
+// All GraphQL Queries
+export const getAllUsers = () => UserModel.findAll({});
+
+// All GraphQL Mutations
 export const createNewUser = (root, args) => {
-  // sanitise and validate input
-  const result = createNewUserValidation(args);
-
-  // return if any errors
-  if (result.error) {
-    return result.error;
-  }
-
-  // return added user to GRAPHQL MUTATION
-  return new UserModel(result.value).save();
+  const result = createNewUserValidation(args); // validate user input
+  if (result.error) return result.error; // return error if exist
+  return new UserModel(result.value).save(); // return saved user
 };
-
-export const getAllUsers = () =>
-  // perform authentication here if needed
-  // return all users to GRAPHQL QUERY
-  UserModel.findAll({});
