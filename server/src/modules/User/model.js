@@ -8,11 +8,11 @@ const UserSchema = new Schema({
   age: {
     type: Number,
     required: true
-  },
-  chatlist: {
-    type: Schema.ObjectId,
-    ref: 'Chatlist'
   }
+  // chatlist: {
+  //   type: Schema.ObjectId,
+  //   ref: 'Chatlist'
+  // }
 });
 
 // Schema can have plugins

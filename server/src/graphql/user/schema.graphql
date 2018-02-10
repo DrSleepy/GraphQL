@@ -1,14 +1,12 @@
+type User {
+  displayName: String!
+  age: Int!
+}
+
 type Query {
-  # Returns list of all users in the database
-  getAllUsers: [User]
+  getAllUsers: [User] # Returns list of all users in the database
 }
 
 type Mutation {
-  createNewUser: String
-}
-
-type User {
-  name: String
-  age: Int
-  gender: String
+  createNewUser(displayName: String!, age: Int!): User
 }

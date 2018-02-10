@@ -23,6 +23,7 @@ module.exports = {
   },
   // add your custom rules here
   rules: {
+    'max-len': ['error', { code: 120 }],
     'linebreak-style': 0,
     'no-console': 0,
     'comma-dangle': 0,

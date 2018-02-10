@@ -1,11 +1,25 @@
-/* eslint-disable */
+// THIS IS WHERE ACTUAL USER METHODS LIVE. CONTROLLER CALLS VALIDATION folder to validate data.
+// File within validation folder returns if passed data is valid
 
-// THIS IS WHERE ACTUAL USER METHODS LIVE. CONTROLLER CALLS UserService to validate data.
-// UserService then returns data with 200 status  etc
+// ALL function in return directly to GRAPHQL calls
 
-import UserService from './UserService';
+import UserModel from './model';
+import createNewUserValidation from './validation/createNewUser';
 
-export const signup = async (req, res) => {
-  // return await UserService.validateSignup(req.body)
-  // return await UserService.sendMessage(req.body)
+export const createNewUser = (root, args) => {
+  // sanitise and validate input
+  const result = createNewUserValidation(args);
+
+  // return if any errors
+  if (result.error) {
+    return result.error;
+  }
+
+  // return added user to GRAPHQL MUTATION
+  return new UserModel(result.value).save();
 };
+
+export const getAllUsers = () =>
+  // perform authentication here if needed
+  // return all users to GRAPHQL QUERY
+  UserModel.findAll({});

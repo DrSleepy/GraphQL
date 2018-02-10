@@ -1,4 +1,4 @@
-const createNewUser = (/* root, args */) => 'New user created!';
+import { createNewUser } from '../../modules/user/controller';
 
 export default {
   createNewUser
