@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { JoiEmail, JoiPassword } from '../../../joi';
+import { JoiEmail, JoiPassword } from '../../joi';
 
 export default args => {
   const loginSchema = Joi.object().keys({

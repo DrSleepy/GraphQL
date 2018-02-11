@@ -1,5 +1,5 @@
-import { getAllUsers } from '../../modules/user/controller';
+// import { getAllUsers } from '../../modules/user/controller';
 
-export default {
-  getAllUsers
-};
+// export default {
+//   getAllUsers
+// };

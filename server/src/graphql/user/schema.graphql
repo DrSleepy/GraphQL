@@ -1,21 +1,43 @@
+# Types
 type User {
-  _id: ID! # NEEDS to be here if you want to query it.
+  _id: ID # NEEDS to be here if you want to query it.
+  displayName: String
+  age: Int
+  email: String
+  password: String
+}
+
+type AuthResponse {
+  ok: Boolean
+  errors: Error
+  user: User
+}
+
+type Error {
+  path: [String] # Is array to match Joi errors
+  message: String
+}
+
+# Inputs
+input RegisterInput {
   displayName: String!
   age: Int!
   email: String!
   password: String!
+  confirmPassword: String!
 }
 
-type Login {
+input LoginInput {
   email: String!
-  password: Int!
+  password: String!
 }
 
+# Queries and Mutations
 type Query {
   getAllUsers: [User] # Returns list of all users in the database
 }
 
 type Mutation {
-  createNewUser(displayName: String!, age: Int!, email: String!, password: String!): User
-  login(email: String!, password: String!): Boolean
+  register(registerDetails: RegisterInput): AuthResponse
+  login(loginDetails: LoginInput): AuthResponse
 }

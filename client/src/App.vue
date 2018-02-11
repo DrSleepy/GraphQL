@@ -38,14 +38,10 @@ export default {
       this.getAllUsers = response.data.getAllUsers;
     },
     async login() {
-      const email = this.email;
-      const password = this.password;
-
       const response = await this.$apollo.mutate({
         mutation: LOGIN_MUTATION,
-        variables: { email, password }
+        variables: { email: this.email, password: this.password }
       });
-
       console.log(response);
     }
   },
