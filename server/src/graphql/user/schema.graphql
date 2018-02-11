@@ -9,7 +9,7 @@ type User {
 
 type AuthResponse {
   ok: Boolean
-  errors: Error
+  errors: [Error]
   user: User
 }
 

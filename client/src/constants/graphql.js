@@ -16,18 +16,14 @@ export const LOGIN_MUTATION = gql`
   }
 `;
 
-export const PLACEHOLDER = gql`
-  mutation LoginQuery($loginDetails: LoginInput) {
-    login(loginDetails: $loginDetails) {
-      ok
-      errors {
-        path
-        message
-      }
-      user {
-        displayName
-        age
-      }
+export const GET_ALL_USERS_QUERY = gql`
+  query {
+    getAllUsers {
+      _id
+      displayName
+      age
+      email
+      password
     }
   }
 `;

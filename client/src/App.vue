@@ -2,12 +2,12 @@
   <div>
 
     <input type="email" v-model="email">
-    <p> {{ errors.email }} </p>
+    <p v-if="errors"> {{ errors.email }} </p>
 
     <input type="text" v-model="password">
     <p> {{ errors.password }} </p>
 
-    <button @click="login()"> submit </button>
+    <button @click=" login() "> login </button>
 
   </div>
 </template>
@@ -20,7 +20,10 @@ export default {
     return {
       email: '',
       password: '',
-      errors: {}
+      errors: {
+        email: '',
+        password: ''
+      }
     };
   },
   methods: {
@@ -35,18 +38,23 @@ export default {
         }
       });
 
-      const errors = response.data.login.errors;
-      if (!errors) {
-        this.errors = {};
-        return;
+      // reversed in order to get most accurate error first
+      const errors = response.data.login.errors.reverse();
+      this.resetErrors();
+      if (errors) {
+        this.errorHander(errors);
       }
-
-      const propToAdd = errors.path[0];
-      const message = errors.message.replace(/"/g, '');
-
-      this.errors = {
-        [propToAdd]: message
-      };
+    },
+    resetErrors() {
+      this.errors = { email: '', password: '' };
+    },
+    errorHander(errors) {
+      // append errors to vuejs errors object
+      errors.forEach(current => {
+        const key = current.path[0];
+        const value = current.message.replace(/"/g, '');
+        this.errors[key] = value;
+      });
     }
   }
 };

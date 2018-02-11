@@ -6,7 +6,10 @@
 import loginService from '../actions/login/service';
 import registerService from '../actions/register/service';
 
+import UserModel from '../models/User';
+
 // All GraphQL Queries
+export const getAllUsers = () => UserModel.find({});
 
 // All GraphQL Mutations
 export const login = (root, args) => loginService(args);
