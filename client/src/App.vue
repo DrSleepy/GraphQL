@@ -1,54 +1,53 @@
 <template>
   <div>
-    <p v-if="!getAllUsers"> loading...eeeeeeeee (this method can be used for initial page load) </p>
-    <p v-for="(user, index) in getAllUsers" :key="index"> {{ user.displayName }} {{ user.age }} </p>
-
-    <div>
-      <p v-for="(user, index) in getAllPrivateChats" :key="index"> {{ user.name }} </p>
-      <p v-if="loading"> LLLLLLLLLLLLLLLLLLLLLLLLLLLLL (another way to load) </p>
-    </div>
-    <button @click="getAllUsersList()"> Submit </button>
 
     <input type="email" v-model="email">
+    <p> {{ errors.email }} </p>
+
     <input type="text" v-model="password">
+    <p> {{ errors.password }} </p>
+
     <button @click="login()"> submit </button>
 
   </div>
 </template>
 
 <script>
-import {
-  GET_ALL_USERS_QUERY,
-  GET_ALL_PRIVATE_CHATS_QUERY,
-  LOGIN_MUTATION
-} from './constants/graphql';
+import { LOGIN_MUTATION } from './constants/graphql';
 
 export default {
   data() {
     return {
-      getAllUsers: 'x',
-      loading: 0,
       email: '',
-      password: ''
+      password: '',
+      errors: {}
     };
   },
   methods: {
-    async getAllUsersList() {
-      const response = await this.$apollo.query({ query: GET_ALL_USERS_QUERY });
-      this.getAllUsers = response.data.getAllUsers;
-    },
     async login() {
       const response = await this.$apollo.mutate({
         mutation: LOGIN_MUTATION,
-        variables: { email: this.email, password: this.password }
+        variables: {
+          loginDetails: {
+            email: this.email,
+            password: this.password
+          }
+        }
       });
-      console.log(response);
+
+      const errors = response.data.login.errors;
+      if (!errors) {
+        this.errors = {};
+        return;
+      }
+
+      const propToAdd = errors.path[0];
+      const message = errors.message.replace(/"/g, '');
+
+      this.errors = {
+        [propToAdd]: message
+      };
     }
-  },
-  apollo: {
-    // queries placed here can be used to load data on page load
-    // 'getAllUsers' HAS to match query name!
-    getAllPrivateChats: { query: GET_ALL_PRIVATE_CHATS_QUERY }
   }
 };
 </script>

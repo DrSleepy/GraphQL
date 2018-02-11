@@ -27,13 +27,14 @@ export default async args => {
     return registerResponse;
   }
 
-  // add user
+  // add new user
   let newUser;
-  try {
-    newUser = await new UserModel(result.value).save();
-  } catch (error) {
-    console.log(error);
-  }
+  await new UserModel(result.value)
+    .save()
+    .then(user => {
+      newUser = user;
+    })
+    .catch(error => console.log(error));
 
   return { ok: true, errors: null, user: newUser };
 };
