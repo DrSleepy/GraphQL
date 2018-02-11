@@ -1,11 +1,11 @@
 import UserModel from '../../models/User';
-import registerValidation from './validate';
+import registerSchema from './schema';
 
 export default async args => {
   const registerResponse = { ok: false, errors: null, user: null };
 
   // validate input
-  const result = registerValidation(args.registerDetails);
+  const result = registerSchema(args.registerDetails);
   if (result.error) {
     registerResponse.errors = result.error.details[0]; // eslint-disable-line
     return registerResponse;
@@ -28,6 +28,12 @@ export default async args => {
   }
 
   // add user
-  const newUser = await new UserModel(result.value).save();
+  let newUser;
+  try {
+    newUser = await new UserModel(result.value).save();
+  } catch (error) {
+    console.log(error);
+  }
+
   return { ok: true, errors: null, user: newUser };
 };

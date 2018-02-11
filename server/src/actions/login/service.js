@@ -1,12 +1,12 @@
 import UserModel from '../../models/User';
-import loginValidation from './validate';
+import loginSchema from './schema';
 
 export default async args => {
   // bad response skeleton
   const loginResponse = { ok: false, errors: null, user: null };
 
   // validate input
-  const result = loginValidation(args.loginDetails);
+  const result = loginSchema(args.loginDetails);
   if (result.error) {
     loginResponse.errors = result.error.details[0]; // eslint-disable-line
     return loginResponse;
