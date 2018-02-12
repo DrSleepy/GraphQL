@@ -1,11 +1,15 @@
 import UserModel from '../../models/User';
 import loginSchema from './schema';
+import { signToken } from '../../jwt';
 
 export default async (args, context) => {
-  console.log(context);
-
   // bad response skeleton
-  const loginResponse = { ok: false, errors: [], user: null };
+  let loginResponse = {
+    ok: false,
+    errors: [],
+    user: null,
+    token: null
+  };
 
   // validate input
   const result = loginSchema(args.loginDetails);
@@ -32,6 +36,16 @@ export default async (args, context) => {
     return loginResponse;
   }
 
-  // good response - return valid user
-  return { ok: true, errors: [], user };
+  // assign user json web token
+  const token = signToken(user);
+
+  // formulate good response
+  loginResponse = {
+    ok: true,
+    errors: [],
+    user,
+    token
+  };
+
+  return loginResponse;
 };

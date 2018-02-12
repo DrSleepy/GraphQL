@@ -11,6 +11,7 @@ type AuthResponse {
   ok: Boolean
   errors: [Error]
   user: User
+  token: String
 }
 
 type Error {

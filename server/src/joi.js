@@ -12,8 +12,10 @@ export const JoiOptions = {
   }
 };
 
+/* eslint-disable */
 export const JoiEmail = Joi.string()
   .email()
+  .max(40)
   .label('Email');
 
 export const JoiAge = Joi.number()

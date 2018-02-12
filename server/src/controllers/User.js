@@ -3,10 +3,9 @@
 // 'args' parameter in functions is values used in GraphQL mutation
 // All functions return directly to GraphQL query/mutation
 
+import UserModel from '../models/User';
 import loginService from '../actions/login/service';
 import registerService from '../actions/register/service';
-
-import UserModel from '../models/User';
 
 // All GraphQL Queries
 export const getAllUsers = () => UserModel.find({});
