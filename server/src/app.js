@@ -10,7 +10,7 @@ import schema from './graphql/registerGraphQL';
 import './connection';
 
 const app = express();
-// bob
+
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
@@ -20,7 +20,10 @@ app.use(
   '/graphiql',
   graphqlHTTP({
     schema,
-    graphiql: true
+    graphiql: true,
+    context: {
+      lol: 'LOOOOOOOOOOOOOOOOOL USED HERE'
+    }
   })
 );
 

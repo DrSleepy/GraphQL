@@ -44,15 +44,19 @@ export default {
       if (errors) {
         this.errorHander(errors);
       }
+
+      console.log(response.data.login);
     },
+
     resetErrors() {
       this.errors = { email: '', password: '' };
     },
+
     errorHander(errors) {
       // append errors to vuejs errors object
       errors.forEach(current => {
         const key = current.path[0];
-        const value = current.message.replace(/"/g, '');
+        const value = current.message;
         this.errors[key] = value;
       });
     }

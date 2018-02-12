@@ -12,6 +12,6 @@ import UserModel from '../models/User';
 export const getAllUsers = () => UserModel.find({});
 
 // All GraphQL Mutations
-export const login = (root, args) => loginService(args);
+export const login = (root, args, context) => loginService(args, context);
 
 export const register = (root, args) => registerService(args);

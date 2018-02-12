@@ -1,7 +1,9 @@
 import UserModel from '../../models/User';
 import loginSchema from './schema';
 
-export default async args => {
+export default async (args, context) => {
+  console.log(context);
+
   // bad response skeleton
   const loginResponse = { ok: false, errors: [], user: null };
 
@@ -19,14 +21,14 @@ export default async args => {
   const user = await UserModel.findOne({ email });
   if (!user) {
     // errors must be of formatted like Joi error: { path: [], message: '' }
-    loginResponse.errors.push({ path: ['email'], message: 'email is not registered' });
+    loginResponse.errors.push({ path: ['email'], message: 'Email is not registered' });
     return loginResponse;
   }
 
   // validate password
   const validPassword = user.comparePassword(password, user.password);
   if (!validPassword) {
-    loginResponse.errors.push({ path: ['password'], message: 'incorrect password' });
+    loginResponse.errors.push({ path: ['password'], message: 'Incorrect password' });
     return loginResponse;
   }
 
