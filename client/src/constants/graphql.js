@@ -12,7 +12,6 @@ export const LOGIN_MUTATION = gql`
         displayName
         age
       }
-      token
     }
   }
 `;

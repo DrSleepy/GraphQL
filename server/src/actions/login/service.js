@@ -4,12 +4,7 @@ import { signToken } from '../../jwt';
 
 export default async (args, context) => {
   // bad response skeleton
-  let loginResponse = {
-    ok: false,
-    errors: [],
-    user: null,
-    token: null
-  };
+  const loginResponse = { ok: false, errors: [], user: null };
 
   // validate input
   const result = loginSchema(args.loginDetails);
@@ -39,13 +34,9 @@ export default async (args, context) => {
   // assign user json web token
   const token = signToken(user);
 
-  // formulate good response
-  loginResponse = {
-    ok: true,
-    errors: [],
-    user,
-    token
-  };
+  // add token to response cookie
+  context.res.cookie('token', token, { maxAge: 60 * 60, httpOnly: true });
 
-  return loginResponse;
+  // formulate good response
+  return { ok: true, errors: [], user };
 };

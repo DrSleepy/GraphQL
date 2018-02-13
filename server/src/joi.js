@@ -43,7 +43,7 @@ export const JoiPassword = Joi.string()
 
 export const JoiConfirmPassword = Joi.any()
   .valid(Joi.ref('password'))
-  .label('Confirm Password')
+  .label('Password Confirmation')
   .options({
     language: {
       any: {
