@@ -10,6 +10,8 @@
     <button @click=" login() "> login </button>
     <button @click=" logout() "> logout </button>
 
+    <p>{{ user }}</p>
+
   </div>
 </template>
 
@@ -21,6 +23,7 @@ export default {
     return {
       email: '',
       password: '',
+      user: {},
       errors: {
         email: '',
         password: ''
@@ -45,6 +48,8 @@ export default {
       if (errors) {
         this.errorHander(errors);
       }
+
+      this.user = response.data.login;
 
       console.log(response.data.login);
     },

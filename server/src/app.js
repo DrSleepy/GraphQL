@@ -7,11 +7,12 @@ import express from 'express';
 import graphqlHTTP from 'express-graphql';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import compression from 'compression';
+import helmet from 'helmet';
 
 import { PORT, JWT_SECRET } from './config';
-import schema from './graphql/registerGraphQL';
-
 import { verifyToken } from './jwt';
+import schema from './graphql/registerGraphQL';
 
 // Connects to DB
 import './connection';
@@ -19,7 +20,9 @@ import './connection';
 const app = express();
 
 // Middleware
+app.use(helmet());
 app.use(cors({ origin: 'http://localhost:8080', credentials: true }));
+app.use(compression());
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(verifyToken);
