@@ -7,7 +7,6 @@ import express from 'express';
 import graphqlHTTP from 'express-graphql';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import csrf from 'csurf';
 
 import { PORT, JWT_SECRET } from './config';
 import schema from './graphql/registerGraphQL';
@@ -24,8 +23,6 @@ app.use(cors({ origin: 'http://localhost:8080', credentials: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(verifyToken);
-
-// app.use(csrf());
 
 // Graphql
 const graphqlHTTPMiddleware = graphqlHTTP((req, res) => ({

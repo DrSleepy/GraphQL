@@ -34,10 +34,11 @@ input LoginInput {
 
 # Queries and Mutations
 type Query {
-  getAllUsers: [User] # Returns list of all users in the database
+  getAllUsers: [User]
 }
 
 type Mutation {
   register(registerDetails: RegisterInput): AuthResponse
   login(loginDetails: LoginInput): AuthResponse
+  logout: Boolean
 }

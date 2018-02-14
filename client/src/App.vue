@@ -8,12 +8,13 @@
     <p> {{ errors.password }} </p>
 
     <button @click=" login() "> login </button>
+    <button @click=" logout() "> logout </button>
 
   </div>
 </template>
 
 <script>
-import { LOGIN_MUTATION } from './constants/graphql';
+import { LOGIN_MUTATION, LOGOUT_MUTATION } from './constants/graphql';
 
 export default {
   data() {
@@ -48,8 +49,18 @@ export default {
       console.log(response.data.login);
     },
 
+    async logout() {
+      const response = await this.$apollo.mutate({
+        mutation: LOGOUT_MUTATION
+      });
+      console.log(response.data);
+    },
+
     resetErrors() {
-      this.errors = { email: '', password: '' };
+      this.errors = {
+        email: '',
+        password: ''
+      };
     },
 
     errorHander(errors) {

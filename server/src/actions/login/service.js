@@ -32,10 +32,11 @@ export default async (args, context) => {
   }
 
   // assign user json web token
-  const token = signToken(user);
+  const token = await signToken(user);
 
   // add token to response cookie
-  context.res.cookie('token', token, { maxAge: 60 * 60, httpOnly: true });
+  // ADD SECURE: TRUE TO COOKIE BEFORE PRODUCTION
+  context.res.cookie('token', token, { httpOnly: true });
 
   // formulate good response
   return { ok: true, errors: [], user };

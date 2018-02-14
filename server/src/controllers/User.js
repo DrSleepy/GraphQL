@@ -4,13 +4,16 @@
 // All functions return directly to GraphQL query/mutation
 
 import UserModel from '../models/User';
-import loginService from '../actions/login/service';
 import registerService from '../actions/register/service';
+import loginService from '../actions/login/service';
+import logoutService from '../actions/logout/service';
 
 // All GraphQL Queries
 export const getAllUsers = () => UserModel.find({});
 
 // All GraphQL Mutations
+export const register = (root, args, context) => registerService(args, context);
+
 export const login = (root, args, context) => loginService(args, context);
 
-export const register = (root, args) => registerService(args);
+export const logout = (root, args, context) => logoutService(context);
