@@ -34,7 +34,7 @@ input LoginInput {
 
 # Queries and Mutations
 type Query {
-  getAllUsers: [User]
+  myProfile: User
 }
 
 type Mutation {

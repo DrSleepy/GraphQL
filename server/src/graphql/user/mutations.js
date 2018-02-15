@@ -1,9 +1,9 @@
 // File imports all mutation functions from User controller
 
-import { login, register, logout } from '../../controllers/User';
+import { register, login, logout } from '../../controllers/User';
 
 export default {
-  login,
   register,
+  login,
   logout
 };

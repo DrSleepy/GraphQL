@@ -1,5 +1,5 @@
-import { getAllUsers } from '../../controllers/User';
+import { myProfile } from '../../controllers/User';
 
 export default {
-  getAllUsers
+  myProfile
 };

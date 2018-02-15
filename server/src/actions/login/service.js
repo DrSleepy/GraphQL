@@ -1,6 +1,7 @@
 import UserModel from '../../models/User';
 import loginSchema from './schema';
 import { signToken } from '../../jwt';
+import { SECURE_COOKIES } from '../../config';
 
 export default async (args, context) => {
   // bad response skeleton
@@ -35,8 +36,7 @@ export default async (args, context) => {
   const token = await signToken(user);
 
   // add token to response cookie
-  // ADD SECURE: TRUE TO COOKIE BEFORE PRODUCTION
-  context.res.cookie('token', token, { httpOnly: true });
+  context.res.cookie('token', token, { httpOnly: true, secure: SECURE_COOKIES });
 
   // formulate good response
   return { ok: true, errors: [], user };
