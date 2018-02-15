@@ -33,3 +33,15 @@ export const LOGOUT_MUTATION = gql`
     logout
   }
 `;
+
+export const MY_PROFILE_QUERY = gql`
+  query {
+    myProfile {
+      _id
+      displayName
+      age
+      email
+      password
+    }
+  }
+`;

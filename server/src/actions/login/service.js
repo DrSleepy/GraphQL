@@ -20,7 +20,7 @@ export default async (args, context) => {
   // check if user exists
   const user = await UserModel.findOne({ email });
   if (!user) {
-    // errors must be of formatted like Joi error: { path: [], message: '' }
+    // errors must be formatted like Joi error: { path: [], message: '' }
     loginResponse.errors.push({ path: ['email'], message: 'Email is not registered' });
     return loginResponse;
   }

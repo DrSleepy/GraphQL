@@ -5,9 +5,10 @@ import Vue from 'vue';
 import VueApollo from 'vue-apollo';
 import VueRouter from 'vue-router';
 
-import apolloProvider from './apollo';
 import App from './App';
+import store from './store/store';
 import routes from './routes';
+import apolloProvider from './apollo';
 
 // components
 import Header from './components/Header';
@@ -24,7 +25,8 @@ Vue.config.productionTip = false;
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  apolloProvider,
+  store,
   router,
+  apolloProvider,
   render: h => h(App)
 });

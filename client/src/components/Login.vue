@@ -1,14 +1,18 @@
 <template>
   <div>
 
-    <input type="email" v-model="email">
+    <input type="email" v-model="loginForm.email">
     <p> {{ formErrors.email }} </p>
 
-    <input type="text" v-model="password">
+    <input type="text" v-model="loginForm.password">
     <p> {{ formErrors.password }} </p>
 
-    <button @click="login()"> login </button>
+    <button @click="loginRequest()"> login </button>
+
     <button @click="logout()"> logout </button>
+
+    <p v-if="loading"> Lolxxxxxxxxxxxxxxxxxxx </p>
+
   </div>
 </template>
 
@@ -18,40 +22,46 @@ import { LOGIN_MUTATION, LOGOUT_MUTATION } from '../graphql';
 export default {
   data() {
     return {
-      email: '',
-      password: '',
+      loginForm: {
+        email: 'bob33@hotmail.com',
+        password: '12345678'
+      },
       formErrors: {
         email: '',
         password: ''
-      }
+      },
+      loading: 0
     };
   },
   methods: {
-    async login() {
+    async logout() {
+      const loggedOut = await this.$apollo.mutate({ mutation: LOGOUT_MUTATION });
+      if (loggedOut) this.$store.state.user = 'used logged out';
+    },
+
+    async loginRequest() {
       const response = await this.$apollo.mutate({
         mutation: LOGIN_MUTATION,
-        variables: {
-          loginDetails: {
-            email: this.email,
-            password: this.password
-          }
-        }
+        loadingKey: 'loading',
+        variables: { loginDetails: { ...this.loginForm } }
       });
+      this.loginResponse(response);
+    },
 
+    loginResponse(response) {
       // reversed order to get most accurate error first
       const errors = response.data.login.errors.reverse();
+
+      // handle errors
       this.resetErrors();
       if (errors) {
         this.errorHanlder(errors);
       }
-      this.user = response.data.login.user;
-      if (this.user) this.$router.push('/Details');
-    },
 
-    logout() {
-      this.$apollo.mutate({
-        mutation: LOGOUT_MUTATION
-      });
+      // handle successful login
+      this.user = response.data.login.user;
+      this.$store.state.user = response.data.login.user;
+      if (this.user) this.$router.push('/Profile');
     },
 
     resetErrors() {

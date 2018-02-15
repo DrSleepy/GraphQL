@@ -1,7 +1,11 @@
 <template>
   <div>
     <ul>
-      <router-link to="/" tag="li">
+      <router-link to="/Home" tag="li">
+        <a>Home</a>
+      </router-link>
+
+      <router-link to="/Profile" tag="li">
         <a>My Account</a>
       </router-link>
 
@@ -9,20 +13,11 @@
         <a>Login</a>
       </router-link>
 
-      <a @click="logout()">Logout</a>
-
     </ul>
   </div>
 </template>
 
 <script>
-export default {
-  methods: {
-    logout() {
-      console.log('logging out...');
-    }
-  }
-};
 </script>
 
 <style>
