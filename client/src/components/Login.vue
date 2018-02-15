@@ -36,13 +36,12 @@ export default {
   methods: {
     async logout() {
       const loggedOut = await this.$apollo.mutate({ mutation: LOGOUT_MUTATION });
-      if (loggedOut) this.$store.state.user = 'used logged out';
+      if (loggedOut) this.$store.state.currentUser = null;
     },
 
     async loginRequest() {
       const response = await this.$apollo.mutate({
         mutation: LOGIN_MUTATION,
-        loadingKey: 'loading',
         variables: { loginDetails: { ...this.loginForm } }
       });
       this.loginResponse(response);
@@ -60,7 +59,9 @@ export default {
 
       // handle successful login
       this.user = response.data.login.user;
-      this.$store.state.user = response.data.login.user;
+      this.$store.state.currentUser = response.data.login.user;
+      console.log(this.$store.state.currentUser);
+
       if (this.user) this.$router.push('/Profile');
     },
 

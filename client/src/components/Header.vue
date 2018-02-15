@@ -5,7 +5,7 @@
         <a>Home</a>
       </router-link>
 
-      <router-link to="/Profile" tag="li">
+      <router-link to="/Profile" tag="li" v-if="!this.$store.state.currentUser">
         <a>My Account</a>
       </router-link>
 
@@ -18,6 +18,7 @@
 </template>
 
 <script>
+export default {};
 </script>
 
 <style>
