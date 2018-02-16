@@ -1,30 +1,22 @@
 <template>
   <div>
-    <p>{{myProfile}}</p>
+    <div v-if="!authed">
+      <p> You must be logged in! </p>
+    </div>
+    <div v-else>
+      <p>Disaplay name: {{ authed.displayName }}</p>
+      <p>Age: {{ authed.age }}</p>
+    </div>
   </div>
 </template>
 
 <script>
 // import { MY_PROFILE_QUERY } from '../graphql';
+import { mapGetters } from 'vuex';
 
 export default {
-  data() {
-    return {
-      myProfile: 'no used saved yet'
-    };
-  },
-  apollo: {
-    // myProfile: {
-    //   query: MY_PROFILE_QUERY
-    // }
-  },
-  beforeMount() {
-    console.log(this.myProfile);
-    this.myProfile = this.$store.state.user;
-    console.log(this.myProfile);
-
-    // const user = await this.$apollo.query({ query: MY_PROFILE_QUERY });
-    // this.myProfile = user;
+  computed: {
+    ...mapGetters(['authed'])
   }
 };
 </script>

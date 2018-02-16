@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <input type="email" v-model="loginForm.email">
     <p> {{ formErrors.email }} </p>
 
@@ -9,10 +8,7 @@
 
     <button @click="loginRequest()"> login </button>
 
-    <button @click="logout()"> logout </button>
-
-    <p v-if="loading"> Lolxxxxxxxxxxxxxxxxxxx </p>
-
+    <button @click="logoutRequest()"> logout </button>
   </div>
 </template>
 
@@ -29,21 +25,29 @@ export default {
       formErrors: {
         email: '',
         password: ''
-      },
-      loading: 0
+      }
     };
   },
   methods: {
-    async logout() {
-      const loggedOut = await this.$apollo.mutate({ mutation: LOGOUT_MUTATION });
-      if (loggedOut) this.$store.state.currentUser = null;
+    async logoutRequest() {
+      const mutation = { mutation: LOGOUT_MUTATION };
+      const loggedOut = await this.$apollo.mutate(mutation);
+      if (loggedOut) {
+        this.$store.dispatch('setCurrentUser', null);
+        this.$router.replace('/Home');
+      }
     },
 
     async loginRequest() {
-      const response = await this.$apollo.mutate({
+      const mutation = {
         mutation: LOGIN_MUTATION,
-        variables: { loginDetails: { ...this.loginForm } }
-      });
+        variables: {
+          loginDetails: {
+            ...this.loginForm
+          }
+        }
+      };
+      const response = await this.$apollo.mutate(mutation);
       this.loginResponse(response);
     },
 
@@ -53,16 +57,19 @@ export default {
 
       // handle errors
       this.resetErrors();
-      if (errors) {
+      if (errors.length > 0) {
         this.errorHanlder(errors);
+        return;
       }
 
-      // handle successful login
-      this.user = response.data.login.user;
-      this.$store.state.currentUser = response.data.login.user;
-      console.log(this.$store.state.currentUser);
+      // add user to vuex
+      const user = response.data.login.user;
+      this.$store.dispatch('setCurrentUser', user);
 
-      if (this.user) this.$router.push('/Profile');
+      // redirect if successful
+      if (user) {
+        this.$router.push('/Home');
+      }
     },
 
     resetErrors() {

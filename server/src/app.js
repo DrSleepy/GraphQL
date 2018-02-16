@@ -5,6 +5,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
 import helmet from 'helmet';
+import logged from 'morgan';
 
 import { PORT, JWT_SECRET } from './config';
 import { verifyToken } from './jwt';
@@ -18,6 +19,7 @@ const app = express();
 // Middleware
 app.use(helmet());
 app.use(compression());
+app.use(logged('dev'));
 app.use(cors({ origin: 'http://localhost:8080', credentials: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());

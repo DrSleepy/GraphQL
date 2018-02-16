@@ -5,7 +5,7 @@
         <a>Home</a>
       </router-link>
 
-      <router-link to="/Profile" tag="li" v-if="!this.$store.state.currentUser">
+      <router-link to="/Profile" tag="li" v-if="authed">
         <a>My Account</a>
       </router-link>
 
@@ -18,7 +18,13 @@
 </template>
 
 <script>
-export default {};
+import { mapGetters } from 'vuex';
+
+export default {
+  computed: {
+    ...mapGetters(['authed'])
+  }
+};
 </script>
 
 <style>
