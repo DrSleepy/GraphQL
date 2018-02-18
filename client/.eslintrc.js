@@ -23,6 +23,8 @@ module.exports = {
   },
   // add your custom rules here
   rules: {
+    'guard-for-in': 0,
+    'no-restricted-syntax': 0,
     'max-len': ['error', { code: 120 }],
     'linebreak-style': 0,
     'no-console': 0,

@@ -8,11 +8,11 @@ import { genSaltSync, hashSync, compareSync } from 'bcrypt';
 const UserSchema = new Schema({
   displayName: {
     type: String,
-    required: true
+    default: 'Anonymous'
   },
   age: {
     type: Number,
-    required: true
+    default: 18
   },
   email: {
     type: String,
@@ -20,6 +20,10 @@ const UserSchema = new Schema({
     unique: true
   },
   password: {
+    type: String,
+    required: true
+  },
+  gender: {
     type: String,
     required: true
   },

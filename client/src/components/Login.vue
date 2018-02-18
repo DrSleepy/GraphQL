@@ -7,13 +7,11 @@
     <p> {{ formErrors.password }} </p>
 
     <button @click="loginRequest()"> login </button>
-
-    <button @click="logoutRequest()"> logout </button>
   </div>
 </template>
 
 <script>
-import { LOGIN_MUTATION, LOGOUT_MUTATION } from '../graphql';
+import { LOGIN_MUTATION } from '../graphql';
 
 export default {
   data() {
@@ -29,15 +27,6 @@ export default {
     };
   },
   methods: {
-    async logoutRequest() {
-      const mutation = { mutation: LOGOUT_MUTATION };
-      const loggedOut = await this.$apollo.mutate(mutation);
-      if (loggedOut) {
-        this.$store.dispatch('setCurrentUser', null);
-        this.$router.replace('/Home');
-      }
-    },
-
     async loginRequest() {
       const mutation = {
         mutation: LOGIN_MUTATION,
@@ -69,14 +58,16 @@ export default {
       // redirect if successful
       if (user) {
         this.$router.push('/Home');
+        return;
       }
+
+      this.formErrors.generic = 'An error occured. Please try again';
     },
 
     resetErrors() {
-      this.formErrors = {
-        email: '',
-        password: ''
-      };
+      for (const key in this.formErrors) {
+        this.formErrors[key] = '';
+      }
     },
 
     errorHanlder(errors) {

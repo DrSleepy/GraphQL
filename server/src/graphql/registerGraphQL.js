@@ -13,8 +13,6 @@ import privateChatMutations from './privateChat/mutations';
 // Schemas
 const typeDefs = [userSchema, privateChatSchema];
 
-// fdfgf
-
 // Queries and resolvers
 const resolvers = {
   Query: {

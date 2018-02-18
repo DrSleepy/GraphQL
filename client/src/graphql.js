@@ -16,6 +16,25 @@ export const LOGIN_MUTATION = gql`
   }
 `;
 
+export const REGISTER_MUTATION = gql`
+  mutation LoginQuery($registerDetails: RegisterInput) {
+    register(registerDetails: $registerDetails) {
+      ok
+      errors {
+        path
+        message
+      }
+      user {
+        _id
+        displayName
+        age
+        email
+        password
+      }
+    }
+  }
+`;
+
 export const GET_ALL_USERS_QUERY = gql`
   query {
     getAllUsers {

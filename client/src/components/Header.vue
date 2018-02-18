@@ -9,9 +9,15 @@
         <a>My Account</a>
       </router-link>
 
-      <router-link to="/Login" tag="li">
+      <router-link to="/Register" tag="li" v-if="!authed">
+        <a>Register</a>
+      </router-link>
+
+      <router-link to="/Login" tag="li" v-if="!authed">
         <a>Login</a>
       </router-link>
+
+      <p @click="logoutRequest()" v-if="authed">Logout</p>
 
     </ul>
   </div>
@@ -20,9 +26,21 @@
 <script>
 import { mapGetters } from 'vuex';
 
+import { LOGOUT_MUTATION } from '../graphql';
+
 export default {
   computed: {
     ...mapGetters(['authed'])
+  },
+  methods: {
+    async logoutRequest() {
+      const mutation = { mutation: LOGOUT_MUTATION };
+      const loggedOut = await this.$apollo.mutate(mutation);
+      if (loggedOut) {
+        this.$store.dispatch('logoutCurrentUser');
+        this.$router.replace('/Home');
+      }
+    }
   }
 };
 </script>

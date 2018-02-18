@@ -1,7 +1,9 @@
 import UserModel from '../../models/User';
 import registerSchema from './schema';
+import { signToken } from '../../jwt';
+import { SECURE_COOKIES } from '../../config';
 
-export default async args => {
+export default async (args, context) => {
   const registerResponse = { ok: false, errors: [], user: null };
 
   // validate input
@@ -29,6 +31,12 @@ export default async args => {
       newUser = user;
     })
     .catch(error => console.log(error));
+
+  // assign user json web token
+  const token = await signToken(newUser);
+
+  // add token to response cookie
+  context.res.cookie('token', token, { httpOnly: true, secure: SECURE_COOKIES });
 
   return { ok: true, errors: [], user: newUser };
 };
