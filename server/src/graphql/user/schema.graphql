@@ -1,10 +1,9 @@
 # Types
 type User {
-  _id: ID # NEEDS to be here if you want to query it.
-  displayName: String
-  age: Int
-  email: String
-  password: String
+  displayName: String!
+  age: Int!
+  email: String!
+  gender: String!
 }
 
 type AuthResponse {

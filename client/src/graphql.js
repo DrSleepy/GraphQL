@@ -25,11 +25,9 @@ export const REGISTER_MUTATION = gql`
         message
       }
       user {
-        _id
         displayName
         age
-        email
-        password
+        gender
       }
     }
   }
