@@ -9,11 +9,12 @@ import loginService from '../actions/login/service';
 import logoutService from '../actions/logout/service';
 
 // All GraphQL Queries
-export const myProfile = (root, args, context) => myProfileService(context);
+export const allQueries = {
+  myProfile: (root, args, context) => myProfileService(context)
+};
 
-// All GraphQL Mutations
-export const register = (root, args, context) => registerService(args, context);
-
-export const login = (root, args, context) => loginService(args, context);
-
-export const logout = (root, args, context) => logoutService(context);
+export const allMutations = {
+  register: (root, args, context) => registerService(args, context),
+  login: (root, args, context) => loginService(args, context),
+  logout: (root, args, context) => logoutService(context)
+};

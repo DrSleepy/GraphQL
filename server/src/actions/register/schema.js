@@ -7,7 +7,7 @@ export default args => {
     email: JoiEmail.required(),
     password: JoiPassword.required(),
     confirmPassword: JoiConfirmPassword.required(),
-    gender: Joi.string() // TO VALIDATE LATER
+    gender: Joi.string().valid(['Male', 'Female']) // TO VALIDATE LATER
   });
 
   return Joi.validate(args, newUserSchema, JoiOptions);

@@ -17,7 +17,11 @@
         <a>Login</a>
       </router-link>
 
-      <p @click="logoutRequest()" v-if="authed">Logout</p>
+      <router-link to="/Chatlist" tag="li" v-if="authed">
+        <a>Chatlist</a>
+      </router-link>
+
+      <li @click="logoutRequest()" v-if="authed">Logout</li>
 
     </ul>
   </div>
@@ -25,7 +29,6 @@
 
 <script>
 import { mapGetters } from 'vuex';
-
 import { LOGOUT_MUTATION } from '../graphql';
 
 export default {

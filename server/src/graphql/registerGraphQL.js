@@ -1,14 +1,10 @@
 import { makeExecutableSchema } from 'graphql-tools';
 
-// User
-import userSchema from './user/schema.graphql';
-import userQueries from './user/queries';
-import userMutations from './user/mutations';
+// Schema imports
+import userSchema from './schemas/User.graphql';
+import privateChatSchema from './schemas/PrivateChat.graphql';
 
-// Private Chat
-import privateChatSchema from './privateChat/schema.graphql';
-import privateChatQueries from './privateChat/queries';
-import privateChatMutations from './privateChat/mutations';
+import { allQueries, allMutations } from '../actions/registerActions';
 
 // Schemas
 const typeDefs = [userSchema, privateChatSchema];
@@ -16,13 +12,11 @@ const typeDefs = [userSchema, privateChatSchema];
 // Queries and resolvers
 const resolvers = {
   Query: {
-    ...userQueries,
-    ...privateChatQueries
+    ...allQueries
   },
 
   Mutation: {
-    ...userMutations,
-    ...privateChatMutations
+    ...allMutations
   }
 };
 

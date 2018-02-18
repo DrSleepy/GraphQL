@@ -11,7 +11,6 @@
 </template>
 
 <script>
-// import { MY_PROFILE_QUERY } from '../graphql';
 import { mapGetters } from 'vuex';
 
 export default {

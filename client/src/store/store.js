@@ -12,15 +12,13 @@ export default new Vuex.Store({
   },
   mutations: {
     setCurrentUser: (state, payload) => {
-      console.log(payload);
-
       localStorage.setItem('userDisplayName', payload.displayName);
-      localStorage.setItem('UserloggedIn', true);
+      localStorage.setItem('userLoggedIn', true);
       state.currentUser = payload;
     },
     logoutCurrentUser: state => {
       localStorage.removeItem('userDisplayName');
-      localStorage.removeItem('UserloggedIn');
+      localStorage.removeItem('userLoggedIn');
       state.currentUser = null;
     }
   },
@@ -32,7 +30,7 @@ export default new Vuex.Store({
       commit('logoutCurrentUser');
     },
     tryAutoLogin: ({ commit }) => {
-      const loggedIn = localStorage.getItem('UserloggedIn');
+      const loggedIn = localStorage.getItem('userLoggedIn');
       if (!loggedIn) {
         commit('logoutCurrentUser');
         return;
