@@ -6,6 +6,10 @@ type User {
   gender: String!
 }
 
+type PrivateChat {
+  name: String
+}
+
 type AuthResponse {
   ok: Boolean
   errors: [Error]

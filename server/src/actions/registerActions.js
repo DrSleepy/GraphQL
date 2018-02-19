@@ -8,7 +8,6 @@ import registerService from '../actions/register/service';
 import loginService from '../actions/login/service';
 import logoutService from '../actions/logout/service';
 
-// All GraphQL Queries
 export const allQueries = {
   myProfile: (root, args, context) => myProfileService(context)
 };
