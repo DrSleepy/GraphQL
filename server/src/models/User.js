@@ -27,9 +27,17 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
+  preferences: {
+    type: Schema.ObjectId,
+    ref: 'Preference'
+  },
   chatlist: {
     type: Schema.ObjectId,
     ref: 'Chatlist'
+  },
+  blocklist: {
+    type: Schema.ObjectId,
+    ref: 'Blocklist'
   }
 });
 

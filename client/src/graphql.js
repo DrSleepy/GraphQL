@@ -10,7 +10,6 @@ export const LOGIN_MUTATION = gql`
       }
       user {
         displayName
-        age
       }
     }
   }

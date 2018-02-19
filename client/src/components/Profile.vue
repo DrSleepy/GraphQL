@@ -5,7 +5,6 @@
     </div>
     <div v-else>
       <p>Disaplay name: {{ authed.displayName }}</p>
-      <p>Age: {{ authed.age }}</p>
     </div>
   </div>
 </template>

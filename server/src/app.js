@@ -1,14 +1,14 @@
-import bodyParser from 'body-parser';
-import express from 'express';
-import graphqlHTTP from 'express-graphql';
 import cors from 'cors';
-import cookieParser from 'cookie-parser';
-import compression from 'compression';
 import helmet from 'helmet';
 import logged from 'morgan';
+import express from 'express';
+import bodyParser from 'body-parser';
+import compression from 'compression';
+import cookieParser from 'cookie-parser';
+import graphqlHTTP from 'express-graphql';
 
-import { PORT, JWT_SECRET } from './config';
 import { verifyToken } from './jwt';
+import { PORT, JWT_SECRET } from './config';
 import schema from './graphql/registerGraphQL';
 
 // Connects to DB
