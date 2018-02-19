@@ -39,10 +39,12 @@ export default {
     async logoutRequest() {
       const mutation = { mutation: LOGOUT_MUTATION };
       const loggedOut = await this.$apollo.mutate(mutation);
-      if (loggedOut) {
-        this.$store.dispatch('logoutCurrentUser');
-        this.$router.replace('/Home');
-      }
+      this.logoutResponse(loggedOut);
+    },
+    logoutResponse(loggedOut) {
+      if (!loggedOut) return;
+      this.$store.dispatch('logoutCurrentUser');
+      this.$router.replace('/Home');
     }
   }
 };

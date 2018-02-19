@@ -1,3 +1,8 @@
+// To fix:
+// 1. Fething 'stranger' twice. Once for querying and once for populating
+//    Problem: DO NOT fetch 'stranger' twice. Use already fetched 'stranger'
+//    File: actions/ findNewChat/ service.js
+
 import cors from 'cors';
 import helmet from 'helmet';
 import logged from 'morgan';

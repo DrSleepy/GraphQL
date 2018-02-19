@@ -1,13 +1,40 @@
 # Types
 type User {
-  displayName: String!
-  age: Int!
-  email: String!
-  gender: String!
+  displayName: String
+  age: Int
+  email: String
+  gender: String
+  preferences: Preference
+  chatlist: Chatlist
+  blocklist: Blocklist
+}
+
+type Chatlist {
+  # _id: ID
+  privateChats: [PrivateChat]
+}
+
+type Blocklist {
+  # _id: ID
+  users: [ID]
+}
+
+type Preference {
+  minAge: Int
+  maxAge: Int
+  gender: String
 }
 
 type PrivateChat {
-  name: String
+  user1: User
+  user2: User
+  messages: [Message]
+}
+
+type Message {
+  time: String
+  text: String
+  user: User
 }
 
 type AuthResponse {
@@ -43,4 +70,5 @@ type Mutation {
   register(registerDetails: RegisterInput): AuthResponse
   login(loginDetails: LoginInput): AuthResponse
   logout: Boolean
+  findNewChat: PrivateChat
 }

@@ -36,7 +36,7 @@ export default {
         email: 'm-subahi@hotmail.com',
         password: '12345678',
         confirmPassword: '12345678',
-        gender: 'm'
+        gender: 'Male'
       },
       formErrors: {
         email: '',

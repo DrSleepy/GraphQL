@@ -1,4 +1,7 @@
 import UserModel from '../../models/User';
+import ChatlistModel from '../../models/Chatlist';
+import BlocklistModel from '../../models/Blocklist';
+import PreferenceModel from '../../models/Preference';
 import registerSchema from './schema';
 import { signToken } from '../../jwt';
 import { SECURE_COOKIES } from '../../config';
@@ -23,20 +26,25 @@ export default async (args, context) => {
     return registerResponse;
   }
 
-  // add new user
-  let newUser;
-  await new UserModel(result.value)
-    .save()
-    .then(user => {
-      newUser = user;
-    })
-    .catch(error => console.log(error));
+  // create new user
+  let newChatlist = new ChatlistModel().save();
+  let newBlocklist = new BlocklistModel().save();
+  let newPreferences = new PreferenceModel().save();
+  const promises = [newChatlist, newBlocklist, newPreferences];
+  [newChatlist, newBlocklist, newPreferences] = await Promise.all([...promises]);
 
-  // assign user json web token
-  const token = await signToken(newUser);
+  const newUser = {
+    ...result.value,
+    chatlist: newChatlist.id,
+    blocklist: newBlocklist.id,
+    preferences: newPreferences.id
+  };
 
-  // add token to response cookie
+  const savedNewUser = await new UserModel(newUser).save();
+
+  // create and set jwt
+  const token = await signToken(savedNewUser);
   context.res.cookie('token', token, { httpOnly: true, secure: SECURE_COOKIES });
 
-  return { ok: true, errors: [], user: newUser };
+  return { ok: true, errors: [], user: savedNewUser };
 };

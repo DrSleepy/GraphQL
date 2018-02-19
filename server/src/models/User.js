@@ -29,15 +29,18 @@ const UserSchema = new Schema({
   },
   preferences: {
     type: Schema.ObjectId,
-    ref: 'Preference'
+    ref: 'Preference',
+    required: true
   },
   chatlist: {
     type: Schema.ObjectId,
-    ref: 'Chatlist'
+    ref: 'Chatlist',
+    required: true
   },
   blocklist: {
     type: Schema.ObjectId,
-    ref: 'Blocklist'
+    ref: 'Blocklist',
+    required: true
   }
 });
 
