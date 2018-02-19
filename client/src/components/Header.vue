@@ -6,7 +6,7 @@
       </router-link>
 
       <router-link to="/Profile" tag="li" v-if="authed">
-        <a>My Account</a>
+        <a>Profile</a>
       </router-link>
 
       <router-link to="/Register" tag="li" v-if="!authed">

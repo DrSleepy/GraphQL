@@ -25,6 +25,18 @@ type Preference {
   gender: String
 }
 
+input PreferenceInput {
+  minAge: Int
+  maxAge: Int
+  gender: String
+}
+
+type PreferenceResponse {
+  ok: Boolean
+  errors: [Error]
+  preferences: Preference
+}
+
 type PrivateChat {
   user1: User
   user2: User
@@ -71,4 +83,5 @@ type Mutation {
   login(loginDetails: LoginInput): AuthResponse
   logout: Boolean
   findNewChat: PrivateChat
+  updatePreferences(preferenceDetails: PreferenceInput): PreferenceResponse
 }

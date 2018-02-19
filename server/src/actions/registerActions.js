@@ -8,6 +8,7 @@ import registerService from '../actions/register/service';
 import loginService from '../actions/login/service';
 import logoutService from '../actions/logout/service';
 import findNewChatService from '../actions/findNewChat/service';
+import updatePreferencesService from '../actions/updatePreferences/service';
 
 export const allQueries = {
   myProfile: (root, args, context) => myProfileService(context)
@@ -17,5 +18,6 @@ export const allMutations = {
   register: (root, args, context) => registerService(args, context),
   login: (root, args, context) => loginService(args, context),
   logout: (root, args, context) => logoutService(context),
-  findNewChat: (root, args, context) => findNewChatService(context)
+  findNewChat: (root, args, context) => findNewChatService(context),
+  updatePreferences: (root, args, context) => updatePreferencesService(args, context)
 };

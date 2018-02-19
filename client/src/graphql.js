@@ -61,3 +61,20 @@ export const MY_PROFILE_QUERY = gql`
     }
   }
 `;
+
+export const UPDATE_PREFERENCES_MUTATION = gql`
+  mutation UpdatePreferences($preferenceDetails: PreferenceInput) {
+    updatePreferences(preferenceDetails: $preferenceDetails) {
+      ok
+      errors {
+        message
+        path
+      }
+      preferences {
+        minAge
+        maxAge
+        gender
+      }
+    }
+  }
+`;
