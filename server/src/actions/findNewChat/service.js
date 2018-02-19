@@ -3,17 +3,9 @@ import Chatlist from '../../models/Chatlist';
 import PrivateChatModel from '../../models/PrivateChat';
 
 export default async context => {
-  const currentUser = await UserModel.findById({ _id: context.userId }).populate([
-    'preferences',
-    'chatlist',
-    'blocklist'
-  ]);
+  const currentUser = await UserModel.findById({ _id: context.userId });
+  const stranger = await UserModel.findById({ _id: '5a8b18c1d4922903801bc2f5' });
 
-  const stranger = await UserModel.findById({ _id: '5a8b18c1d4922903801bc2f5' }).populate([
-    'preferences',
-    'chatlist',
-    'blocklist'
-  ]);
   // create new private chatroom
   const newPrivateChat = {
     user1: currentUser.id,
@@ -29,7 +21,7 @@ export default async context => {
 
   // push private chat room to both users
   await Chatlist.update(
-    { _id: { $in: [currentUser.chatlist.id, stranger.chatlist.id] } },
+    { _id: { $in: [currentUser.chatlist, stranger.chatlist] } },
     { $push: { privateChats: savedNewPrivateChat.id } },
     { multi: true }
   );
