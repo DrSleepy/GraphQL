@@ -3,7 +3,9 @@
   <div>
     <p>Main App.vue</p>
     <app-header></app-header>
-    <router-view></router-view>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 

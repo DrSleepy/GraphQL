@@ -6,23 +6,27 @@
     <input type="text" v-model="loginForm.password">
     <p> {{ formErrors.password }} </p>
 
+    <p v-if="formErrors.generic"> {{ formErrors.generic }} </p>
+
     <button @click="loginRequest()"> login </button>
   </div>
 </template>
 
 <script>
 import { LOGIN_MUTATION } from '../graphql';
+import { resetErrors, appendErrors } from '../helpers';
 
 export default {
   data() {
     return {
       loginForm: {
-        email: 'm-subahi@hotmail.com',
+        email: 'm-subahi@hotmail.com1',
         password: '12345678'
       },
       formErrors: {
         email: '',
-        password: ''
+        password: '',
+        generic: ''
       }
     };
   },
@@ -45,9 +49,9 @@ export default {
       const errors = response.data.login.errors.reverse();
 
       // handle errors
-      this.resetErrors();
+      resetErrors(this.formErrors);
       if (errors.length > 0) {
-        this.errorHanlder(errors);
+        this.formErrors = appendErrors(errors, this.formErrors);
         return;
       }
 
@@ -62,21 +66,6 @@ export default {
       }
 
       this.formErrors.generic = 'An error occured. Please try again';
-    },
-
-    resetErrors() {
-      for (const key in this.formErrors) {
-        this.formErrors[key] = '';
-      }
-    },
-
-    errorHanlder(errors) {
-      // append errors to vuejs formErrors object
-      errors.forEach(current => {
-        const key = current.path[0];
-        const value = current.message;
-        this.formErrors[key] = value;
-      });
     }
   }
 };

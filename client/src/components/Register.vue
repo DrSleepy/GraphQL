@@ -19,15 +19,16 @@
       <label for="gender"> Gender: </label>
       <input id="gender" type="text" v-model="registerForm.gender">
       <p> {{ formErrors.gender }}</p>
-      <!-- TO VALIDATE LATER -->
+
     </div>
-    <p v-if="formErrors.generic"> {{ formErrors.generic }} lol</p>
+    <p v-if="formErrors.generic"> {{ formErrors.generic }} </p>
     <button type="submit" @click.prevent="registerRequest()"> Register </button>
   </form>
 </template>
 
 <script>
 import { REGISTER_MUTATION } from '../graphql';
+import { resetErrors, appendErrors } from '../helpers';
 
 export default {
   data() {
@@ -65,9 +66,9 @@ export default {
       const errors = response.data.register.errors.reverse();
 
       // handle errors
-      this.resetErrors();
+      resetErrors(this.formErrors);
       if (errors.length > 0) {
-        this.errorHanlder(errors);
+        this.formErrors = appendErrors(errors, this.formErrors);
         return;
       }
 
@@ -82,21 +83,6 @@ export default {
       }
 
       this.formErrors.generic = 'An error occured. Please try again';
-    },
-
-    resetErrors() {
-      for (const key in this.formErrors) {
-        this.formErrors[key] = '';
-      }
-    },
-
-    errorHanlder(errors) {
-      // append errors to vuejs formErrors object
-      errors.forEach(current => {
-        const key = current.path[0];
-        const value = current.message;
-        this.formErrors[key] = value;
-      });
     }
   }
 };

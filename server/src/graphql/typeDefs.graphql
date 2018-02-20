@@ -76,6 +76,7 @@ input LoginInput {
 # Queries and Mutations
 type Query {
   myProfile: User
+  myPreferences: Preference
 }
 
 type Mutation {

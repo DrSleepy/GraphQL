@@ -62,6 +62,16 @@ export const MY_PROFILE_QUERY = gql`
   }
 `;
 
+export const MY_PREFERENCES_QUERY = gql`
+  query {
+    myPreferences {
+      minAge
+      maxAge
+      gender
+    }
+  }
+`;
+
 export const UPDATE_PREFERENCES_MUTATION = gql`
   mutation UpdatePreferences($preferenceDetails: PreferenceInput) {
     updatePreferences(preferenceDetails: $preferenceDetails) {

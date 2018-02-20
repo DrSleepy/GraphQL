@@ -58,8 +58,7 @@ export const JoiGender = Joi.string()
   });
 
 export const JoiGenderPreference = Joi.string()
-  .lowercase()
-  .valid(['male', 'female', 'both'])
+  .valid(['Male', 'Female', 'Both'])
   .label('Gender')
   .options({
     language: {

@@ -2,7 +2,7 @@ import UserModel from '../../models/User';
 import Chatlist from '../../models/Chatlist';
 import PrivateChatModel from '../../models/PrivateChat';
 
-export default async context => {
+export default async (args, context) => {
   const currentUser = await UserModel.findById({ _id: context.userId });
   const stranger = await UserModel.findById({ _id: '5a8b18c1d4922903801bc2f5' });
 
