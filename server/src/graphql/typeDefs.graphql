@@ -22,13 +22,13 @@ type Blocklist {
 type Preference {
   minAge: Int
   maxAge: Int
-  gender: String
+  gender: [String]
 }
 
 input PreferenceInput {
   minAge: Int
   maxAge: Int
-  gender: String
+  gender: [String]
 }
 
 type PreferenceResponse {
@@ -77,12 +77,12 @@ input LoginInput {
 type Query {
   myProfile: User
   myPreferences: Preference
+  findNewChat: PrivateChat
 }
 
 type Mutation {
   register(registerDetails: RegisterInput): AuthResponse
   login(loginDetails: LoginInput): AuthResponse
   logout: Boolean
-  findNewChat: PrivateChat
   updatePreferences(preferenceDetails: PreferenceInput): PreferenceResponse
 }

@@ -13,13 +13,13 @@ import updatePreferencesService from '../actions/updatePreferences/service';
 
 export const allQueries = {
   myProfile: (root, args, context) => myProfileService(args, context),
-  myPreferences: (root, args, context) => myPreferencesService(args, context)
+  myPreferences: (root, args, context) => myPreferencesService(args, context),
+  findNewChat: (root, args, context) => findNewChatService(args, context)
 };
 
 export const allMutations = {
   register: (root, args, context) => registerService(args, context),
   login: (root, args, context) => loginService(args, context),
   logout: (root, args, context) => logoutService(args, context),
-  findNewChat: (root, args, context) => findNewChatService(args, context),
   updatePreferences: (root, args, context) => updatePreferencesService(args, context)
 };

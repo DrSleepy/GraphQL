@@ -11,7 +11,7 @@ export default async (args, context) => {
     return preferencesResponse;
   }
 
-  const { minAge, maxAge, gender } = result.value;
+  let { minAge, maxAge, gender } = result.value; // eslint-disable-line
 
   const user = await UserModel.findById(context.userId);
   const updatedPreferences = await PreferenceModel.findByIdAndUpdate(

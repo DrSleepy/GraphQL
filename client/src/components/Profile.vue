@@ -7,8 +7,15 @@
     <p> {{ formErrors.minAge }}</p>
     <input type="number" placeholder="maxAge" v-model="preferencesForm.maxAge">
     <p> {{ formErrors.maxAge }}</p>
-    <input type="text" placeholder="gender" v-model="preferencesForm.gender">
-    <p> {{ formErrors.gender }}</p>
+
+    <label for="male"> Male </label>
+    <input id="male" type="checkbox" value="male" v-model="preferencesForm.gender">
+
+    <label for="female"> Female </label>
+    <input id="female" type="checkbox" value="female" v-model="preferencesForm.gender">
+
+    <p> {{ preferencesForm.gender }} </p>
+    <p> {{ formErrors.gender }} </p>
 
     <p> {{ formErrors.generic }} </p>
 
@@ -28,7 +35,7 @@ export default {
       preferencesForm: {
         minAge: 18,
         maxAge: 70,
-        gender: 'Male'
+        gender: []
       },
       formErrors: {
         minAge: '',

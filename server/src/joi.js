@@ -13,6 +13,7 @@ export const JoiOptions = {
 };
 
 export const JoiEmail = Joi.string()
+  .lowercase()
   .email()
   .max(40)
   .label('Email');
@@ -57,13 +58,24 @@ export const JoiGender = Joi.string()
     }
   });
 
-export const JoiGenderPreference = Joi.string()
-  .valid(['Male', 'Female', 'Both'])
+/* eslint function-paren-newline: ["error", "consistent"] */
+export const JoiGenderPreference = Joi.array()
+  .items(
+    Joi.string()
+      .lowercase()
+      .valid('male', 'female')
+  )
+  .unique()
+  .min(1)
+  .max(2)
   .label('Gender')
   .options({
     language: {
-      any: {
-        allowOnly: 'may only be Male / Female / Both'
+      array: {
+        min: 'must be at least of Male, Female or Both',
+        includesRequiredUnknowns: 'may only be Male, Female or Both',
+        includesRequiredKnowns: 'may only be Male, Female or Both',
+        unique: 'may not hold duplicates'
       }
     }
   });
@@ -96,9 +108,3 @@ export const JoiConfirmPassword = Joi.any()
       }
     }
   });
-
-export const JoiUsername = Joi.string()
-  .alphanum()
-  .min(5)
-  .max(30)
-  .label('Username');
