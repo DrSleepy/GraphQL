@@ -8,7 +8,8 @@ export default new Vuex.Store({
     currentUser: null
   },
   getters: {
-    authed: state => state.currentUser
+    authed: state => state.currentUser,
+    loggedIn: state => state.loggedIn
   },
   mutations: {
     setCurrentUser: (state, payload) => {
@@ -27,6 +28,7 @@ export default new Vuex.Store({
       commit('setCurrentUser', payload);
     },
     logoutCurrentUser: ({ commit }) => {
+      window.location.reload(); // to clear router cache
       commit('logoutCurrentUser');
     },
     tryAutoLogin: ({ commit }) => {

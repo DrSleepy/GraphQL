@@ -20,7 +20,7 @@ export default {
   data() {
     return {
       loginForm: {
-        email: 'm-subahi@hotmail.com1',
+        email: 'm-subahi@hotmail.com',
         password: '12345678'
       },
       formErrors: {
