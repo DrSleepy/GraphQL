@@ -1,4 +1,4 @@
-import UserModel from '../../models/User';
+import UserModel from '../../blueprints/User';
 import loginSchema from './schema';
 import { signToken } from '../../jwt';
 import { SECURE_COOKIES } from '../../config';
@@ -18,7 +18,7 @@ export default async (args, context) => {
   const { email, password } = result.value;
 
   // check if user exists
-  const user = await UserModel.findOne({ email });
+  const user = await UserModel.findOne({ email }).select(['email', 'password']);
   if (!user) {
     // errors must be formatted like Joi error: { path: [], message: '' }
     loginResponse.errors.push({ path: ['email'], message: 'Email is not registered' });

@@ -1,4 +1,4 @@
-import mongoose, { Schema } from 'mongoose';
+import { Schema } from 'mongoose';
 
 const MessageSchema = new Schema({
   time: {
@@ -9,10 +9,10 @@ const MessageSchema = new Schema({
     type: String,
     default: 'Text here...'
   },
-  user: {
-    type: Schema.ObjectId,
-    ref: 'User'
+  userId: {
+    type: String,
+    required: true
   }
 });
 
-export default mongoose.model('Message', MessageSchema);
+export default MessageSchema;

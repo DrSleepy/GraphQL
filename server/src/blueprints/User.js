@@ -5,19 +5,23 @@ import mongoose, { Schema } from 'mongoose';
 import uniqueValidator from 'mongoose-unique-validator';
 import { genSaltSync, hashSync, compareSync } from 'bcrypt';
 
-const UserSchema = new Schema({
+import PreferenceSchema from './Preference';
+
+export const UserSchema = new Schema({
   displayName: {
     type: String,
     default: 'Anonymous'
   },
   age: {
     type: Number,
-    default: 18
+    default: 18,
+    index: true
   },
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    index: true
   },
   password: {
     type: String,
@@ -25,24 +29,19 @@ const UserSchema = new Schema({
   },
   gender: {
     type: String,
-    required: true
+    required: true,
+    index: true
   },
   preferences: {
-    type: Schema.ObjectId,
-    ref: 'Preference',
-    required: true
+    type: PreferenceSchema,
+    default: PreferenceSchema
   },
-  chatlist: {
-    type: Schema.ObjectId,
-    ref: 'Chatlist',
-    required: true
-  },
-  blocklist: {
-    type: Schema.ObjectId,
-    ref: 'Blocklist',
-    required: true
-  }
+  // talkingTo: [Schema.Types.ObjectId], // Array of UserIDs
+  privateChats: [String], // Array of PrivateChatIDs
+  blocklist: [String] // Array of UserIDs
 });
+
+UserSchema.index([{ age: 1, type: 1 }, { email: 1, type: 1 }, { gender: 1, type: 1 }]);
 
 // plugins
 UserSchema.plugin(uniqueValidator, {

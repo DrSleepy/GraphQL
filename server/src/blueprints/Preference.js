@@ -1,7 +1,7 @@
 /* eslint func-names: 0 */
 /* eslint space-before-function-paren: 0 */
 
-import mongoose, { Schema } from 'mongoose';
+import { Schema } from 'mongoose';
 
 const PreferenceSchema = new Schema({
   minAge: {
@@ -29,4 +29,4 @@ PreferenceSchema.pre('save', function(next) {
   next();
 });
 
-export default mongoose.model('Preference', PreferenceSchema);
+export default PreferenceSchema;

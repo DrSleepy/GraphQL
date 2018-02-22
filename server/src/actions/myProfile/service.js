@@ -1,3 +1,3 @@
-import UserModel from '../../models/User';
+import UserModel from '../../blueprints/User';
 
 export default (args, context) => UserModel.findById(context.userId);

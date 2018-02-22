@@ -5,18 +5,8 @@ type User {
   email: String
   gender: String
   preferences: Preference
-  chatlist: Chatlist
-  blocklist: Blocklist
-}
-
-type Chatlist {
-  # _id: ID
-  privateChats: [PrivateChat]
-}
-
-type Blocklist {
-  # _id: ID
-  users: [ID]
+  chatlist: [String]
+  blocklist: [String]
 }
 
 type Preference {
@@ -77,7 +67,7 @@ input LoginInput {
 type Query {
   myProfile: User
   myPreferences: Preference
-  findNewChat: PrivateChat
+  findNewStranger: User
 }
 
 type Mutation {

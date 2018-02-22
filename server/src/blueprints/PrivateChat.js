@@ -1,5 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 
+import MessageSchema from './Message';
+
 const PrivateChatSchema = new Schema({
   user1: {
     type: Schema.ObjectId,
@@ -9,12 +11,7 @@ const PrivateChatSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'User'
   },
-  messages: [
-    {
-      type: Schema.ObjectId,
-      ref: 'Message'
-    }
-  ]
+  messages: [MessageSchema]
 });
 
 export default mongoose.model('PrivateChat', PrivateChatSchema);

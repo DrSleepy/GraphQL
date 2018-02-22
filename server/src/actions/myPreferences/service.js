@@ -1,7 +1,10 @@
-import UserModel from '../../models/User';
-import PreferenceModel from '../../models/Preference';
+import UserModel from '../../blueprints/User';
 
 export default async (args, context) => {
-  const user = await UserModel.findById(context.userId);
-  return PreferenceModel.findById(user.preferences);
+  const user = await UserModel.findById(context.userId).select([
+    'preferences.minAge',
+    'preferences.maxAge',
+    'preferences.gender'
+  ]);
+  return user.preferences;
 };
