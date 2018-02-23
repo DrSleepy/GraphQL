@@ -1,8 +1,5 @@
 // To fix:
-// 1. Fething 'stranger' twice. Once for querying and once for populating
-//    Problem: DO NOT fetch 'stranger' twice. Use already fetched 'stranger'
-//    File: actions/ findNewChat/ service.js
-// 2. Index queries - https://www.youtube.com/watch?v=vftxTniVYrU&t=67s
+// 1. Validate User blocklist, chatlist and talkingTo fields to be mongoIDs
 
 import cors from 'cors';
 import helmet from 'helmet';

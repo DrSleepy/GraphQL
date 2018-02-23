@@ -1,0 +1,11 @@
+@import (reference) './../index.less';
+//Buttons
+.btn(@background) {
+  .box-shadow-1;
+  border-radius: 3px;
+  color: white;
+  background-color: @background;
+  &:hover {
+    background-color: darken(@background, 10%);
+  }
+}

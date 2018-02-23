@@ -1,0 +1,19 @@
+@import (reference) './../index.less';
+
+.split(@columns, @rows) {
+  .grid-column;
+  .col-gap-3;
+  .pad-tb-10;
+  .pad-lr-6;
+  grid-template-columns: repeat(@columns, 1fr);
+  grid-template-rows: repeat(@rows, max-content);
+  align-self: center;
+  background-color: #fff;
+}
+.split__icon {
+  .push-down-4;
+  .width-height-10;
+}
+.split__title {
+  .push-down-1--5;
+}

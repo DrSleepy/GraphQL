@@ -36,12 +36,20 @@ export const UserSchema = new Schema({
     type: PreferenceSchema,
     default: PreferenceSchema
   },
-  // talkingTo: [Schema.Types.ObjectId], // Array of UserIDs
-  privateChats: [String], // Array of PrivateChatIDs
-  blocklist: [String] // Array of UserIDs
+  talkingTo: [String], // UserIDs
+  privateChats: [String], // PrivateChatIDs
+  blocklist: [String] // UserIDs
 });
 
-UserSchema.index([{ age: 1, type: 1 }, { email: 1, type: 1 }, { gender: 1, type: 1 }]);
+// indexes
+UserSchema.index([
+  { email: 1 },
+  { gender: 1 },
+  { age: 1 },
+  { 'preferences.minAge': 1 },
+  { 'preferences.maxAge': 1 },
+  { 'preferences.gender': 1 }
+]);
 
 // plugins
 UserSchema.plugin(uniqueValidator, {

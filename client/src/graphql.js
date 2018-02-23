@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export const LOGIN_MUTATION = gql`
-  mutation LoginQuery($loginDetails: LoginInput) {
+  mutation($loginDetails: LoginInput) {
     login(loginDetails: $loginDetails) {
       ok
       errors {
@@ -16,7 +16,7 @@ export const LOGIN_MUTATION = gql`
 `;
 
 export const REGISTER_MUTATION = gql`
-  mutation LoginQuery($registerDetails: RegisterInput) {
+  mutation($registerDetails: RegisterInput) {
     register(registerDetails: $registerDetails) {
       ok
       errors {
@@ -53,27 +53,21 @@ export const LOGOUT_MUTATION = gql`
 export const MY_PROFILE_QUERY = gql`
   query {
     myProfile {
-      _id
       displayName
       age
       email
-      password
-    }
-  }
-`;
-
-export const MY_PREFERENCES_QUERY = gql`
-  query {
-    myPreferences {
-      minAge
-      maxAge
       gender
+      preferences {
+        minAge
+        maxAge
+        gender
+      }
     }
   }
 `;
 
 export const UPDATE_PREFERENCES_MUTATION = gql`
-  mutation UpdatePreferences($preferenceDetails: PreferenceInput) {
+  mutation($preferenceDetails: PreferenceInput) {
     updatePreferences(preferenceDetails: $preferenceDetails) {
       ok
       errors {

@@ -1,14 +1,21 @@
-
 <template>
-  <div>
-    <p>Main App.vue</p>
-    <app-header></app-header>
-    <!-- Do NOT remove 'authed' key. Refreshes router cache one logout -->
-    <keep-alive>
-      <router-view></router-view>
-    </keep-alive>
+  <div class="root">
+    <div class="wrapper">
+      <keep-alive>
+        <!-- <router-view></router-view> -->
+        <app-login-view></app-login-view>
+      </keep-alive>
+    </div>
   </div>
 </template>
+
+<style lang="less">
+@import './less/base.less';
+</style>
+
+<style lang="less" scoped>
+@import (reference) './less/index.less';
+</style>
 
 <script>
 export default {
@@ -17,7 +24,3 @@ export default {
   }
 };
 </script>
-
-<style>
-
-</style>

@@ -18,7 +18,7 @@ export default async (args, context) => {
   const { email, password } = result.value;
 
   // check if user exists
-  const user = await UserModel.findOne({ email }).select(['email', 'password']);
+  const user = await UserModel.findOne({ email });
   if (!user) {
     // errors must be formatted like Joi error: { path: [], message: '' }
     loginResponse.errors.push({ path: ['email'], message: 'Email is not registered' });

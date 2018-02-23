@@ -26,7 +26,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { MY_PREFERENCES_QUERY, UPDATE_PREFERENCES_MUTATION } from '../graphql';
+import { MY_PROFILE_QUERY, UPDATE_PREFERENCES_MUTATION } from '../graphql';
 import { resetErrors, appendErrors } from '../helpers';
 
 export default {
@@ -49,10 +49,12 @@ export default {
   },
   methods: {
     async loadPreferences() {
-      const query = { query: MY_PREFERENCES_QUERY };
+      const query = { query: MY_PROFILE_QUERY };
       const response = await this.$apollo.query(query);
-      const { minAge, maxAge, gender } = response.data.myPreferences;
-      this.preferencesForm = { minAge, maxAge, gender };
+      console.log(response);
+
+      // const { minAge, maxAge, gender } = response.data.myPreferences;
+      // this.preferencesForm = { minAge, maxAge, gender };
     },
     async updatePreferencesRequest() {
       const mutation = {

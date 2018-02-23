@@ -1,0 +1,28 @@
+@import (reference) './../index.less';
+
+.input-wrapper {
+  .grid-row;
+  background: @block-background-color;
+  border: solid 1px @block-border-color;
+  border-radius: 3px;
+  height: 60px;
+}
+.input-wrapper__icon {
+  .giga;
+  .icon-font;
+  .self-center;
+  color: @primary-color;
+}
+.input-wrapper__input(@position) {
+  outline: none;
+  border: none;
+  border-@{position}: solid 1px @block-border-color;
+
+  & when (@position = left) {
+    border-radius: 0 3px 3px 0;
+  }
+
+  & when (@position = right) {
+    border-radius: 3px 0 0 3px;
+  }
+}

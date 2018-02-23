@@ -32,14 +32,14 @@ export const JoiMinimumAge = Joi.number()
   });
 
 export const JoiMaximumAge = Joi.number()
-  .min(18)
+  .min(19)
   .max(70)
   .greater(Joi.ref('minAge'))
   .label('Maximum Age')
   .options({
     language: {
       number: {
-        min: 'must be 18 or older',
+        min: 'must be 19 or older',
         max: 'must be 70 or younger',
         greater: 'must be older than Minimum Age, {{limit}}'
       }

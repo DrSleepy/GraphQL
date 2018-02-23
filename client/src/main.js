@@ -16,10 +16,8 @@ import store from './store/store';
 import routes from './routes/routes';
 import apolloProvider from './apollo';
 
-// components
-import Header from './components/Header';
-
-Vue.component('app-header', Header);
+import './components/registerComponents';
+import './views/registerViews';
 
 // Plugins
 Vue.use(VueRouter);

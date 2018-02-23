@@ -8,12 +8,10 @@ import registerService from '../actions/register/service';
 import loginService from '../actions/login/service';
 import logoutService from '../actions/logout/service';
 import findNewStrangerService from '../actions/findNewStranger/service';
-import myPreferencesService from '../actions/myPreferences/service';
 import updatePreferencesService from '../actions/updatePreferences/service';
 
 export const allQueries = {
   myProfile: (root, args, context) => myProfileService(args, context),
-  myPreferences: (root, args, context) => myPreferencesService(args, context),
   findNewStranger: (root, args, context) => findNewStrangerService(args, context)
 };
 
