@@ -1,29 +1,7 @@
 <template>
-  <form class="login-page">
+  <form class="form">
 
-    <header class="header">
-      <h1 class="header__title"> ShowMe </h1>
-      <p class="header__slogan"> Easy jobs on the go </p>
-    </header>
-
-    <div class="middle">
-      <div class="middle__input-row middle__input-row--first">
-        <label class="input-row__label input-row__label--first" for="email"></label>
-        <input id="email" class="input-row__input" type="email" placeholder="Email" required>
-      </div>
-      <div class="middle__input-row middle__input-row--last">
-        <label class="input-row__label input-row__label--last" for="password"></label>
-        <input id="password" class="input-row__input" type="password" placeholder="Password" required>
-      </div>
-      <a class="middle__forgot"> Forgot your password? </a>
-      <input id="keep" class="middle__checkbox" type="checkbox">
-      <label class="middle__keep" for="keep"> Keep me signed in </label>
-    </div>
-
-    <div class="bottom">
-      <button class="bottom__signin" type="submit"> Sign In </button>
-      <a class="bottom__new"> Create new account </a>
-    </div>
+    <input class="x" value="x">
 
   </form>
 </template>
@@ -32,6 +10,20 @@
 export default {};
 </script>
 
-<style>
+<style lang="less" scoped>
+@import (reference) '../less/index.less';
 
+.form {
+  .grid-24;
+  grid-template-rows: repeat(24, 1fr);
+}
+.x {
+  grid-column: 4 / span 18;
+}
+
+@media @laptop {
+  .x {
+    grid-column: 6 / span 12;
+  }
+}
 </style>

@@ -16,17 +16,13 @@
 <style lang="less" scoped>
 @import (reference) './less/index.less';
 .root {
+  .grid-24;
   height: 100%;
   background-color: red;
 }
 .wrapper {
   .container;
-  .grid-12;
-  background-color: blue;
-}
-
-.login-page {
-  .span-col-1-13;
+  background-color: green;
 }
 </style>
 
