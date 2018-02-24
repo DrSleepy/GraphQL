@@ -15,6 +15,19 @@
 
 <style lang="less" scoped>
 @import (reference) './less/index.less';
+.root {
+  height: 100%;
+  background-color: red;
+}
+.wrapper {
+  .container;
+  .grid-12;
+  background-color: blue;
+}
+
+.login-page {
+  .span-col-1-13;
+}
 </style>
 
 <script>
