@@ -1,9 +1,14 @@
 <template>
-  <form class="form">
+  <div class="login-view">
 
-    <input class="x" value="x">
+    <header class="view-header">
+      <h1 class="header__item header__item--title"> Chabu </h1>
+      <p class="header__item header__item--slogan"> Converse with strangers </p>
+    </header>
 
-  </form>
+    <app-login-form class="login-form-component"></app-login-form>
+
+  </div>
 </template>
 
 <script>
@@ -13,17 +18,30 @@ export default {};
 <style lang="less" scoped>
 @import (reference) '../less/index.less';
 
-.form {
+.login-view {
   .grid-24;
-  grid-template-rows: repeat(24, 1fr);
-}
-.x {
-  grid-column: 4 / span 18;
+  grid-template-rows: 1fr 3fr;
+  height: 100%;
 }
 
-@media @laptop {
-  .x {
-    grid-column: 6 / span 12;
+.view-header {
+  display: grid;
+  grid-column: 1 / span 24;
+  justify-items: center;
+  align-content: center;
+}
+
+.header__item {
+  &--title {
+    font-family: 'main-font-normal';
+    text-transform: uppercase;
   }
+  &--slogan {
+    .milli;
+  }
+}
+
+.login-form-component {
+  grid-column: 1 / span 24;
 }
 </style>

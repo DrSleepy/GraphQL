@@ -1,7 +1,7 @@
 @import (reference) './../index.less';
 
 .input-wrapper {
-  .grid-row;
+  display: grid;
   background: @block-background-color;
   border: solid 1px @block-border-color;
   border-radius: 3px;
@@ -9,8 +9,8 @@
 }
 .input-wrapper__icon {
   .giga;
-  .icon-font;
   .self-center;
+  font-family: 'Ionicons';
   color: @primary-color;
 }
 .input-wrapper__input(@position) {

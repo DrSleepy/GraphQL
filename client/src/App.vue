@@ -2,8 +2,8 @@
   <div class="root">
     <div class="wrapper">
       <keep-alive>
-        <!-- <router-view></router-view> -->
-        <app-login-view></app-login-view>
+        <router-view></router-view>
+        <!-- <app-login-view></app-login-view> -->
       </keep-alive>
     </div>
   </div>
@@ -18,11 +18,9 @@
 .root {
   .grid-24;
   height: 100%;
-  background-color: red;
 }
 .wrapper {
   .container;
-  background-color: green;
 }
 </style>
 

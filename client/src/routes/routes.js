@@ -1,6 +1,8 @@
-import Home from '../components/Home';
-import Login from '../components/Login';
-import Profile from '../components/Profile';
+// View components
+import Login from '../views/Login';
+import Home from '../views/Home';
+import Profile from '../views/Profile';
+
 import Chatlist from '../components/Chatlist';
 import Register from '../components/Register';
 

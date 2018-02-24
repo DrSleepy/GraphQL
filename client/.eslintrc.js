@@ -25,7 +25,7 @@ module.exports = {
   rules: {
     'guard-for-in': 0,
     'no-restricted-syntax': 0,
-    'max-len': ['error', { code: 120 }],
+    'max-len': 0,
     'linebreak-style': 0,
     'no-console': 0,
     'comma-dangle': 0,

@@ -1,7 +1,7 @@
 import Vue from 'vue';
 
 // component imports
-import Home from './Home';
+import LoginForm from './LoginForm';
 
 // component tags
-Vue.component('app-home', Home);
+Vue.component('app-login-form', LoginForm);
