@@ -19,6 +19,7 @@
   .grid-24;
   height: 100%;
   font-family: 'main-font-normal';
+  color: white;
   background-color: @background-color1;
 }
 .wrapper {

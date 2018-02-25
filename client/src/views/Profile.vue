@@ -136,7 +136,8 @@ export default {
   .pad-lr-4;
   grid-template-rows: max-content 1fr;
   font-family: 'main-font-light';
-  color: white;
+
+  background: linear-gradient(@primary-color 14.8%, transparent 14.8%);
 }
 .user {
   .col-gap-2--5;
@@ -147,6 +148,7 @@ export default {
 
   &__item {
     &--avatar {
+      .box-shadow-8;
       grid-row: 1 / span 2;
       border-radius: 50%;
       width: 100%;
@@ -190,6 +192,7 @@ export default {
 
 .genders {
   .push-down-3;
+  .box-shadow-7;
   @radius: 3px;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -199,6 +202,7 @@ export default {
   #male:checked ~ &__item--male {
     border-radius: @radius 0 0 @radius;
     background-color: @primary-color;
+    border-right: solid 1px #72bcfc;
   }
   #female:checked ~ &__item--female {
     background-color: @primary-color;
@@ -206,7 +210,7 @@ export default {
   }
 
   &__item {
-    .pad-tb-2--5;
+    .pad-tb-2;
     .micro;
     display: grid;
     justify-content: center;
@@ -227,6 +231,9 @@ export default {
 }
 .input-slider {
   .range-slider;
+  &::-webkit-slider-runnable-track {
+    .box-shadow-7;
+  }
 }
 .primary {
   .btn(@secondary-color);
