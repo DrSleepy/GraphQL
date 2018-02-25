@@ -21,12 +21,12 @@ export const JoiEmail = Joi.string()
 export const JoiMinimumAge = Joi.number()
   .min(18)
   .max(70)
-  .label('Minimum Age')
+  .label('Minimum age')
   .options({
     language: {
       number: {
         min: 'must be 18 or older',
-        max: 'must be 70 or younger'
+        max: 'must be 69 or younger'
       }
     }
   });
@@ -35,13 +35,13 @@ export const JoiMaximumAge = Joi.number()
   .min(19)
   .max(70)
   .greater(Joi.ref('minAge'))
-  .label('Maximum Age')
+  .label('Maximum age')
   .options({
     language: {
       number: {
         min: 'must be 19 or older',
         max: 'must be 70 or younger',
-        greater: 'must be older than Minimum Age, {{limit}}'
+        greater: 'must be older than minimum age, {{limit}}'
       }
     }
   });
@@ -72,7 +72,7 @@ export const JoiGenderPreference = Joi.array()
   .options({
     language: {
       array: {
-        min: 'must be at least of Male, Female or Both',
+        min: 'must be selected',
         includesRequiredUnknowns: 'may only be Male, Female or Both',
         includesRequiredKnowns: 'may only be Male, Female or Both',
         unique: 'may not hold duplicates'
