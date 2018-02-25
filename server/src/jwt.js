@@ -4,7 +4,7 @@ import { JWT_SECRET } from './config';
 
 export const signToken = user => {
   const payload = { userId: user.id };
-  const options = { expiresIn: '1h' };
+  const options = { expiresIn: '5h' };
   return jwt.sign(payload, JWT_SECRET, options);
 };
 

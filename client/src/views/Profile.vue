@@ -3,8 +3,8 @@
 
     <!-- <h1 style="visibility: hidden"> My profile </h1> -->
 
-    <section class="user">
-      <img class="user__item user__item--avatar" src="../assets/avatar.jpg" alt="">
+    <section class="section user">
+      <img class="user__item user__item--avatar" src="../assets/avatar.jpg" draggable="false">
       <p class="user__item user__item--display-name">Steven James</p>
       <p class="user__item user__item--age">33, Male</p>
     </section>
@@ -38,7 +38,7 @@
       </section>
     </section>
 
-    <button class="primary" type="submit" @click="updatePreferencesRequest" :disabled="!validForm"> update </button>
+    <button class="primary" type="submit" @click="updatePreferencesRequest" :disabled="!validForm"> Update </button>
   </form>
 </template>
 
@@ -133,37 +133,13 @@ export default {
 .form {
   .grid-24;
   .pad-tb-3;
-  .pad-lr-4;
   grid-template-rows: max-content 1fr;
   font-family: 'main-font-light';
-
-  background: linear-gradient(@primary-color 14.8%, transparent 14.8%);
-}
-.user {
-  .col-gap-2--5;
-  .push-down-5;
-  grid-column: 1 / span 24;
-  display: grid;
-  grid-template-columns: 1fr 2.5fr;
-
-  &__item {
-    &--avatar {
-      .box-shadow-8;
-      grid-row: 1 / span 2;
-      border-radius: 50%;
-      width: 100%;
-    }
-    &--display-name {
-      align-self: end;
-    }
-    &--age {
-      .milli;
-      color: @dark-text-color;
-    }
-  }
 }
 
 .section {
+  .pad-lr-4;
+
   grid-column: 1 / span 24;
 
   &__heading {
@@ -186,6 +162,30 @@ export default {
     &--age {
       .micro;
       color: white;
+    }
+  }
+}
+
+.user {
+  .col-gap-2--5;
+  .push-down-5;
+  grid-column: 1 / span 24;
+  display: grid;
+  grid-template-columns: 1fr 2.5fr;
+
+  &__item {
+    &--avatar {
+      .box-shadow-8;
+      grid-row: 1 / span 2;
+      border-radius: 50%;
+      width: 100%;
+    }
+    &--display-name {
+      align-self: end;
+    }
+    &--age {
+      .milli;
+      color: @dark-text-color;
     }
   }
 }
@@ -242,6 +242,7 @@ export default {
   border-radius: 0;
   width: 100vw;
   position: fixed;
+  left: 0;
   bottom: 0;
   &:disabled {
     background: #9cbad5;
