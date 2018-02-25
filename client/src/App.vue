@@ -18,6 +18,7 @@
 .root {
   .grid-24;
   height: 100%;
+  font-family: 'main-font-normal';
 }
 .wrapper {
   .container;

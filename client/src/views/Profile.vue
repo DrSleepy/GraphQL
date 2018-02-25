@@ -3,35 +3,39 @@
 
     <!-- <h1 style="visibility: hidden"> My profile </h1> -->
 
-    <section class="top">
-      <img class="avatar" src="../assets/avatar.jpg" alt="">
-      <p>NAME</p>
-      <p>age</p>
+    <section class="user">
+      <img class="user__item user__item--avatar" src="../assets/avatar.jpg" alt="">
+      <p class="user__item user__item--display-name">NAME</p>
+      <p class="user__item user__item--age">age</p>
     </section>
 
     <section class="section">
-      <h2 class="section__heading"> Search Preferences</h2>
-      <div>
-        <h3 class="section__subheadings">Interested in:</h3>
-        <p>Men</p>
-        <p>Women</p>
-      </div>
+      <section class="subsection">
+        <h2 class="section__heading"> Search Preferences </h2>
+        <div>
+          <h3 class="section__subheadings"> Interested in: </h3>
+          <p>Men</p>
+          <p>Women</p>
+        </div>
+      </section>
 
-      <div>
-        <h3 class="section__subheadings">Age - From: 'age'</h3>
-        <input type="range" min="18" max="69" step="1" v-model="ageFrom">
-        <p>{{ ageFrom }}</p>
-      </div>
+      <section class="subsection">
+        <h2 class="subsection__heading"> Age </h2>
+        <div>
+          <h3 class="subsection__subheadings"> From:
+            <span class="subsection__subheadings--age"> {{ preferencesForm.minAge }} </span>
+          </h3>
+          <input class="input-slider" type="range" min="18" max="69" step="1" v-model="preferencesForm.minAge" required>
+        </div>
 
-      <div>
-        <h3 class="section__subheadings">Age - To: 'age'</h3>
-        <input type="range" min="18" max="70" step="1" v-model="ageTo">
-        <p>{{ ageTo }}</p>
-      </div>
-    </section>
-
-    <section>
-      <input type="range">
+        <div>
+          <h3 class="subsection__subheadings"> To:
+            <span class="subsection__subheadings--age"> {{ preferencesForm.maxAge }} </span>
+          </h3>
+          <input class="input-slider" type="range" min="19" max="70" step="1" v-model="preferencesForm.maxAge" required>
+          <p class="error-text" v-if="preferencesForm.minAge >= preferencesForm.maxAge"> Must be older than {{ preferencesForm.minAge }}! </p>
+        </div>
+      </section>
     </section>
 
     <!-- <div class="wrapperTest">
@@ -65,38 +69,60 @@
 @import (reference) '../less/index.less';
 .form {
   .grid-24;
-  grid-template-rows: 1fr 3fr;
+  // grid-template-rows: 1fr 3fr;
+  grid-template-rows: max-content 1fr;
 }
-.top {
+.user {
   grid-column: 1 / span 24;
   display: grid;
   grid-template-columns: 1fr 2fr;
   background-color: red;
-}
-.avatar {
-  grid-row: 1/ span 2;
-  background-color: blue;
-  border-radius: 50%;
-  width: 100%;
+
+  &__item {
+    &--avatar {
+      grid-row: 1/ span 2;
+      background-color: blue;
+      border-radius: 50%;
+      width: 100%;
+    }
+    &--display-name {
+    }
+    &--age {
+    }
+  }
 }
 
-.wrapperTest {
-  grid-column: 1 / span 24;
-}
 .section {
   grid-column: 1 / span 24;
   background-color: #063764;
   color: white;
 }
-.section__heading {
-  .kilo;
-  font-family: 'main-font-normal';
-  color: white;
+
+.subsection {
+  &__heading {
+    .kilo;
+    font-family: 'main-font-normal';
+    color: white;
+  }
+
+  &__subheadings {
+    .milli;
+    font-family: 'main-font-normal';
+    color: #9cbad5;
+
+    &--age {
+      .micro;
+      font-family: 'main-font-light';
+      color: white;
+    }
+  }
 }
-.section__subheadings {
-  .milli;
-  font-family: 'main-font-normal';
-  color: #9cbad5;
+
+.error-text {
+  color: @wrong-color;
+}
+.input-slider {
+  .range-slider;
 }
 </style>
 
@@ -108,8 +134,6 @@ import { resetErrors, appendErrors } from '../helpers';
 export default {
   data() {
     return {
-      ageFrom: 30,
-      ageTo: 60,
       preferencesForm: {
         minAge: 18,
         maxAge: 70,
