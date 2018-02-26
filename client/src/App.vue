@@ -1,5 +1,5 @@
 <template>
-  <div class="root">
+  <div id="root" class="root">
     <div class="wrapper">
       <app-menu-view id="menu"></app-menu-view>
       <keep-alive>
@@ -43,44 +43,33 @@
 </style>
 
 <script>
-/* eslint-disable */
+import Hammer from 'hammerjs';
+
 window.onload = () => {
+  const menuAccessArea = window.innerWidth / 8;
+
   const menuUi = document.querySelector('#menu');
-  let menuOpen = false;
+  const root = document.querySelector('#root');
+  const gestures = new Hammer(root);
 
-  let allowMenuAccess = false;
   let startPos;
-  let endPos;
-  const needsToBeSlided = window.innerWidth / 3;
 
-  const dragStart = e => {
-    startPos = e.clientX;
+  gestures.on('panstart panright', e => {
+    if (e.type === 'panstart') {
+      startPos = event.clientX;
+    }
 
-    const menuAccessArea = window.innerWidth / 8;
     if (startPos < menuAccessArea) {
-      allowMenuAccess = true;
-    } else {
-      allowMenuAccess = false;
+      const rounded = Math.round(e.distance);
+      console.log(rounded);
+      if (rounded < 99) {
+        menuUi.style.transform = `translateX(${-100 + rounded}%)`;
+      }
+      if (rounded > 99) {
+        menuUi.style.transform = 'translateX(0%)';
+      }
     }
-  };
-
-  const dragEnd = e => {
-    endPos = e.clientX;
-    if (!allowMenuAccess) {
-      return;
-    }
-    if (endPos - startPos > needsToBeSlided) {
-      menuUi.style.transform = 'translateX(0%)';
-      menuOpen = true;
-    }
-    if (endPos - startPos < needsToBeSlided) {
-      menuUi.style.transform = 'translateX(-100%)';
-      menuOpen = false;
-    }
-  };
-
-  window.addEventListener('mousedown', dragStart);
-  window.addEventListener('mouseup', dragEnd);
+  });
 };
 
 export default {
